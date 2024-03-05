@@ -2,6 +2,7 @@ import * as THREE from "three";
 import * as ZapparThree from "@zappar/zappar-threejs";
 import { GLTFLoader } from "three/examples/jsm/loaders/GLTFLoader";
 import { getUserLocation } from "./location-tracking";
+import { initializeMap } from "./mapbox";
 const model = new URL("../assets/waving.glb", import.meta.url).href;
 import "./index.css";
 
@@ -86,6 +87,9 @@ getUserLocation()
   .then((coords) => {
     // Start things off
     console.log("receiving coordinates", coords);
+    const { latitude, longitude } = coords;
+    const markerLngLat: [number, number] = [longitude, latitude];
+    initializeMap(markerLngLat);
     render();
   })
   .catch((error) => {

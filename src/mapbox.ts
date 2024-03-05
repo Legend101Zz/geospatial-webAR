@@ -1,22 +1,21 @@
 import mapboxgl from "mapbox-gl";
 import "mapbox-gl/dist/mapbox-gl.css";
 
-// Replace 'YOUR_MAPBOX_ACCESS_TOKEN' with your actual Mapbox access token
-mapboxgl.accessToken = "YOUR_MAPBOX_ACCESS_TOKEN";
+mapboxgl.accessToken =
+  "pk.eyJ1IjoibXJpZ2VzaHRoYWt1ciIsImEiOiJjbDdwdjZ2MG4wbGVmM3JzMzVtb2U1MnJ0In0.nbEGuAgv1N1c-tXDyR7d4g";
 
-function initializeMap(markerLngLat: [number, number]): void {
+export function initializeMap(markerLngLat: [number, number]): void {
   const map = new mapboxgl.Map({
-    container: "map", // Specify the container ID
-    style: "mapbox://styles/mapbox/streets-v11", // Use a Mapbox style
-    center: markerLngLat, // Initial center of the map (longitude, latitude)
-    zoom: 1, // Initial zoom level
+    container: "map",
+    style: "mapbox://styles/mapbox/streets-v11",
+    center: markerLngLat,
+    zoom: 12,
   });
 
-  // Add a marker at the center (initially)
   const marker = new mapboxgl.Marker({
-    color: "#FF0000", // Marker color (red)
-    draggable: true, // Allow the user to drag the marker
+    color: "#FF0000",
+    draggable: true,
   })
-    .setLngLat(markerLngLat) // Set initial marker position
+    .setLngLat(markerLngLat)
     .addTo(map);
 }
