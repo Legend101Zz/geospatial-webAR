@@ -1,7 +1,11 @@
 import * as THREE from "three";
 import * as ZapparThree from "@zappar/zappar-threejs";
 import { GLTFLoader } from "three/examples/jsm/loaders/GLTFLoader";
-import { getUserLocation } from "./location-tracking";
+import {
+  getUserLocation,
+  Coordinates,
+  calculateDistance,
+} from "./location-tracking";
 import { initializeMap } from "./mapbox";
 const model = new URL("../assets/waving.glb", import.meta.url).href;
 import "./index.css";
@@ -87,15 +91,44 @@ function render(): void {
 const map = initializeMap();
 const marker = map.getMarker();
 
+let lastKnownCoords: Coordinates | null = null;
+const distanceThreshold = 1; //in kilometers
+
+// Get the HTML element to display distance
+const distanceElement =
+  document.getElementById("tap-to-place") || document.createElement("div");
+
+let totalDistance = 0;
+
 getUserLocation(
   (coords) => {
     console.log("Receiving coordinates:", coords);
-    // Start things off
+
+    // Check if we have previous coordinates to calculate distance
+    if (lastKnownCoords) {
+      const distance = calculateDistance(lastKnownCoords, coords);
+      console.log("Distance is:", distance);
+
+      // Update total distance
+      totalDistance += distance;
+
+      // Display the total distance in the HTML element
+      distanceElement.textContent = `Total Distance Traveled: ${totalDistance.toFixed(
+        2
+      )} km`;
+      // Check if the user has moved beyond the threshold
+      if (distance >= distanceThreshold) {
+        // Trigger Three.js code
+        console.log("Distance is:", distance);
+      }
+    }
+
     const { latitude, longitude } = coords;
     const markerLngLat: [number, number] = [longitude, latitude];
     marker.setLngLat(markerLngLat);
     map.flyTo(markerLngLat, 15);
 
+    lastKnownCoords = coords;
     render();
   },
   (error) => {
