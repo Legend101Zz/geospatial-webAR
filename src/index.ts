@@ -83,15 +83,16 @@ function render(): void {
   requestAnimationFrame(render);
 }
 
-getUserLocation()
-  .then((coords) => {
+getUserLocation(
+  (coords) => {
+    console.log("Receiving coordinates:", coords);
     // Start things off
-    console.log("receiving coordinates", coords);
     const { latitude, longitude } = coords;
     const markerLngLat: [number, number] = [longitude, latitude];
     initializeMap(markerLngLat);
     render();
-  })
-  .catch((error) => {
+  },
+  (error) => {
     console.error("Error getting user location:", error.message);
-  });
+  }
+);
