@@ -83,13 +83,19 @@ function render(): void {
   requestAnimationFrame(render);
 }
 
+// Get the map and marker from initializeMap function
+const map = initializeMap();
+const marker = map.getMarker();
+
 getUserLocation(
   (coords) => {
     console.log("Receiving coordinates:", coords);
     // Start things off
     const { latitude, longitude } = coords;
     const markerLngLat: [number, number] = [longitude, latitude];
-    initializeMap(markerLngLat);
+    marker.setLngLat(markerLngLat);
+    map.flyTo(markerLngLat, 15);
+
     render();
   },
   (error) => {
