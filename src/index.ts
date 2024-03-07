@@ -8,6 +8,7 @@ import {
 } from "./location-tracking";
 import { initializeMap } from "./mapbox";
 const model = new URL("../assets/waving.glb", import.meta.url).href;
+const coin = new URL("../assets/coin.png", import.meta.url).href;
 import "./index.css";
 
 if (ZapparThree.browserIncompatible()) {
@@ -55,6 +56,30 @@ gltfLoader.load(
     console.log("An error ocurred loading the GLTF model");
   }
 );
+
+// adding objects
+
+// Loading texture image for the golden material
+const textureLoader = new THREE.TextureLoader();
+const texture = textureLoader.load(coin);
+
+const goldenMaterial = new THREE.MeshStandardMaterial({
+  color: 0xffd700, // Golden color
+  emissive: 0xffd700,
+  metalness: 1,
+  roughness: 0,
+  map: texture,
+});
+const coinGeometry = new THREE.SphereGeometry(1, 32, 32);
+const goldenCoin = new THREE.Mesh(coinGeometry, goldenMaterial);
+goldenCoin.position.z = -10;
+instantTrackerGroup.add(goldenCoin);
+
+// golden coin 2
+
+const goldenCoin2 = new THREE.Mesh(coinGeometry, goldenMaterial);
+goldenCoin2.position.z = -15;
+instantTrackerGroup.add(goldenCoin2);
 
 const directionalLight = new THREE.DirectionalLight("white", 0.8);
 directionalLight.position.set(0, 5, 0);
