@@ -16,6 +16,12 @@ if (ZapparThree.browserIncompatible()) {
   throw new Error("Unsupported browser");
 }
 
+let totalDistance = 0;
+let totalpoints = 0;
+// Get the HTML element to display points
+const pointElement =
+  document.getElementById("points") || document.createElement("div");
+
 const manager = new ZapparThree.LoadingManager();
 const renderer = new THREE.WebGLRenderer({ antialias: true });
 const scene = new THREE.Scene();
@@ -44,18 +50,18 @@ const instantTrackerGroup = new ZapparThree.InstantWorldAnchorGroup(
 
 scene.add(instantTrackerGroup);
 
-const gltfLoader = new GLTFLoader(manager);
+// const gltfLoader = new GLTFLoader(manager);
 
-gltfLoader.load(
-  model,
-  (gltf) => {
-    instantTrackerGroup.add(gltf.scene);
-  },
-  undefined,
-  () => {
-    console.log("An error ocurred loading the GLTF model");
-  }
-);
+// gltfLoader.load(
+//   model,
+//   (gltf) => {
+//     instantTrackerGroup.add(gltf.scene);
+//   },
+//   undefined,
+//   () => {
+//     console.log("An error ocurred loading the GLTF model");
+//   }
+// );
 
 // adding objects
 
@@ -108,6 +114,12 @@ function render(): void {
 
   camera.updateFrame(renderer);
 
+  if (totalDistance == 0.1) {
+    goldenCoin.visible = false;
+    totalpoints += 1;
+    pointElement.textContent = `Points : ${totalpoints} `;
+  }
+
   renderer.render(scene, camera);
 
   requestAnimationFrame(render);
@@ -124,8 +136,6 @@ const distanceThreshold = 1; //in kilometers
 const distanceElement =
   document.getElementById("distance") || document.createElement("div");
 
-let totalDistance = 0;
-
 getUserLocation(
   (coords) => {
     console.log("Receiving coordinates:", coords);
@@ -139,9 +149,7 @@ getUserLocation(
       totalDistance += distance;
 
       // Display the total distance in the HTML element
-      distanceElement.textContent = `Total Distance Traveled: ${totalDistance.toFixed(
-        2
-      )} km`;
+      distanceElement.textContent = `Distance : ${totalDistance.toFixed(2)} km`;
       // Check if the user has moved beyond the threshold
       if (distance >= distanceThreshold) {
         // Trigger Three.js code

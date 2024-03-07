@@ -24,13 +24,30 @@ body {
 
 #distance {
   position: fixed;
-  bottom: 500px;
+  bottom: 600px;
   left: 30%;
   right: 0px;
   border-radius: 15px;
   background: black;
   color: white;
-  width: 200px;
+  width: 100px;
+  margin-left: -100px;
+  text-align: center;
+  padding: 15px;
+  box-sizing: border-box;
+  font-family: sans-serif;
+  text-transform: uppercase;
+}
+
+#points {
+  position: fixed;
+  bottom: 600px;
+  left: 100%;
+  right: 0px;
+  border-radius: 15px;
+  background: red;
+  color: white;
+  width: 100px;
   margin-left: -100px;
   text-align: center;
   padding: 15px;
