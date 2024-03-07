@@ -64,13 +64,13 @@ const textureLoader = new THREE.TextureLoader();
 const texture = textureLoader.load(coin);
 
 const goldenMaterial = new THREE.MeshStandardMaterial({
-  color: 0xffd700, // Golden color
-  emissive: 0xffd700,
-  metalness: 1,
-  roughness: 0,
+  // color: 0xffd700, // Golden color
+  // emissive: 0xffd700,
+  // metalness: 1,
+  // roughness: 0,
   map: texture,
 });
-const coinGeometry = new THREE.SphereGeometry(1, 32, 32);
+const coinGeometry = new THREE.SphereGeometry(2, 32, 32);
 const goldenCoin = new THREE.Mesh(coinGeometry, goldenMaterial);
 goldenCoin.position.z = -10;
 instantTrackerGroup.add(goldenCoin);
