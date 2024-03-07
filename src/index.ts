@@ -60,15 +60,15 @@ gltfLoader.load(
 // adding objects
 
 // Loading texture image for the golden material
-const textureLoader = new THREE.TextureLoader();
-const texture = textureLoader.load(coin);
+// const textureLoader = new THREE.TextureLoader();
+// const texture = textureLoader.load(coin);
 
 const goldenMaterial = new THREE.MeshStandardMaterial({
-  // color: 0xffd700, // Golden color
-  // emissive: 0xffd700,
-  // metalness: 1,
-  // roughness: 0,
-  map: texture,
+  color: 0xffd700, // Golden color
+  emissive: 0xffd700,
+  metalness: 1,
+  roughness: 0,
+  // map: texture,
 });
 const coinGeometry = new THREE.SphereGeometry(2, 32, 32);
 const goldenCoin = new THREE.Mesh(coinGeometry, goldenMaterial);
@@ -78,7 +78,8 @@ instantTrackerGroup.add(goldenCoin);
 // golden coin 2
 
 const goldenCoin2 = new THREE.Mesh(coinGeometry, goldenMaterial);
-goldenCoin2.position.z = -15;
+goldenCoin2.position.z = -20;
+goldenCoin2.position.y = 5;
 instantTrackerGroup.add(goldenCoin2);
 
 const directionalLight = new THREE.DirectionalLight("white", 0.8);
@@ -121,7 +122,7 @@ const distanceThreshold = 1; //in kilometers
 
 // Get the HTML element to display distance
 const distanceElement =
-  document.getElementById("tap-to-place") || document.createElement("div");
+  document.getElementById("distance") || document.createElement("div");
 
 let totalDistance = 0;
 
