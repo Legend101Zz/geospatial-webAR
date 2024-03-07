@@ -85,7 +85,7 @@ instantTrackerGroup.add(goldenCoin);
 
 const goldenCoin2 = new THREE.Mesh(coinGeometry, goldenMaterial);
 goldenCoin2.position.z = -20;
-goldenCoin2.position.y = 5;
+goldenCoin2.position.y = 1;
 instantTrackerGroup.add(goldenCoin2);
 
 const directionalLight = new THREE.DirectionalLight("white", 0.8);
@@ -107,14 +107,14 @@ placeButton.addEventListener("click", () => {
   placeButton.remove();
 });
 
-function render(): void {
+function render(totalDist: number): void {
   if (!hasPlaced) {
     instantTrackerGroup.setAnchorPoseFromCameraOffset(0, 0, -5);
   }
 
   camera.updateFrame(renderer);
 
-  if (totalDistance == 0.1) {
+  if (totalDist == 0.05) {
     goldenCoin.visible = false;
     totalpoints += 1;
     pointElement.textContent = `Points : ${totalpoints} `;
@@ -163,7 +163,7 @@ getUserLocation(
     map.flyTo(markerLngLat, 15);
 
     lastKnownCoords = coords;
-    render();
+    render(totalDistance);
   },
   (error) => {
     console.error("Error getting user location:", error.message);
