@@ -76,6 +76,15 @@ const goldenMaterial = new THREE.MeshStandardMaterial({
   roughness: 0,
   // map: texture,
 });
+
+const goldenMaterial2 = new THREE.MeshStandardMaterial({
+  color: 0xffd700, // Golden color
+  emissive: 0xffd700,
+  metalness: 1,
+  roughness: 0,
+  wireframe: true,
+  // map: texture,
+});
 const coinGeometry = new THREE.SphereGeometry(1.3, 32, 32);
 const goldenCoin = new THREE.Mesh(coinGeometry, goldenMaterial);
 goldenCoin.position.z = -1;
@@ -83,7 +92,7 @@ instantTrackerGroup.add(goldenCoin);
 
 // golden coin 2
 
-const goldenCoin2 = new THREE.Mesh(coinGeometry, goldenMaterial);
+const goldenCoin2 = new THREE.Mesh(coinGeometry, goldenMaterial2);
 goldenCoin2.position.z = -2;
 goldenCoin2.position.y = 2;
 goldenCoin2.visible = true;
