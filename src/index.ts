@@ -78,8 +78,8 @@ const goldenMaterial = new THREE.MeshStandardMaterial({
 });
 
 const goldenMaterial2 = new THREE.MeshStandardMaterial({
-  color: 0xffd700, // Golden color
-  emissive: 0xffd700,
+  color: 0x000, // Golden color
+  // emissive: 0xffd700,
   metalness: 1,
   roughness: 0,
   wireframe: true,
@@ -93,7 +93,7 @@ instantTrackerGroup.add(goldenCoin);
 // golden coin 2
 
 const goldenCoin2 = new THREE.Mesh(coinGeometry, goldenMaterial2);
-goldenCoin2.position.z = -2;
+goldenCoin2.position.z = -10;
 goldenCoin2.position.y = 2;
 goldenCoin2.visible = true;
 instantTrackerGroup.add(goldenCoin2);
