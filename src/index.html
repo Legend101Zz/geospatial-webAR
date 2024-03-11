@@ -7,6 +7,7 @@
       content="width=device-width,user-scalable=no,minimal-ui"
     />
     <title>Fanisko ASICS AR</title>
+    <script src="//cdn.jsdelivr.net/npm/eruda"></script>
     <script type="module" src="index.ts"></script>
   </head>
 
@@ -17,5 +18,9 @@
     <div id="tap-to-place">Start Running</div>
     <div id="distance">Distance Travelled :</div>
     <div id="points">Points :</div>
+
+    <script>
+      eruda.init();
+    </script>
   </body>
 </html>
