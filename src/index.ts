@@ -34,6 +34,25 @@ window.addEventListener("resize", () => {
 
 const camera = new ZapparThree.Camera();
 
+function calculateDistanceFromOrigin(): number {
+  const userPosition = new THREE.Vector3();
+  camera.getWorldPosition(userPosition); // Get the world position of the camera
+
+  return userPosition.length();
+}
+
+function checkUserARposeDist(): boolean {
+  const distanceThresholdCoin2 = 2;
+  const userPosition = new THREE.Vector3();
+  camera.getWorldPosition(userPosition);
+  const distanceToCoin2 = userPosition.distanceTo(goldenCoin2.position);
+
+  if (distanceToCoin2 < distanceThresholdCoin2) return true;
+
+  console.log("distanceToCoin2", distanceToCoin2);
+  return false;
+}
+
 ZapparThree.permissionRequestUI().then((granted) => {
   if (granted) camera.start();
   else ZapparThree.permissionDeniedUI();
@@ -66,15 +85,15 @@ scene.add(instantTrackerGroup);
 // adding objects
 
 // Loading texture image for the golden material
-// const textureLoader = new THREE.TextureLoader();
-// const texture = textureLoader.load(coin);
+const textureLoader = new THREE.TextureLoader();
+const texture = textureLoader.load(coin);
 
 const goldenMaterial = new THREE.MeshStandardMaterial({
-  color: 0xffd700, // Golden color
+  // color: 0xffd700, // Golden color
   emissive: 0xffd700,
-  metalness: 1,
-  roughness: 0,
-  // map: texture,
+  // metalness: 1,
+  // roughness: 0,
+  map: texture,
 });
 
 const goldenMaterial2 = new THREE.MeshStandardMaterial({
@@ -85,16 +104,17 @@ const goldenMaterial2 = new THREE.MeshStandardMaterial({
   wireframe: true,
   // map: texture,
 });
-const coinGeometry = new THREE.SphereGeometry(1.3, 32, 32);
+const coinGeometry = new THREE.SphereGeometry(2, 32, 32);
 const goldenCoin = new THREE.Mesh(coinGeometry, goldenMaterial);
-goldenCoin.position.z = -1;
+// goldenCoin.position.z = -3;
+goldenCoin.visible = false;
 instantTrackerGroup.add(goldenCoin);
 
 // golden coin 2
 
 const goldenCoin2 = new THREE.Mesh(coinGeometry, goldenMaterial2);
-goldenCoin2.position.z = -10;
-goldenCoin2.position.y = 2;
+// goldenCoin2.position.z = -3;
+// goldenCoin2.position.y = 2;
 goldenCoin2.visible = true;
 instantTrackerGroup.add(goldenCoin2);
 
@@ -119,18 +139,31 @@ placeButton.addEventListener("click", () => {
 
 function render(totalDist: number): void {
   if (!hasPlaced) {
-    instantTrackerGroup.setAnchorPoseFromCameraOffset(0, 0, -5);
-  }
+    instantTrackerGroup.setAnchorPoseFromCameraOffset(0, 0, -15);
+  } else {
+    totalDist = totalDist / 10000;
+    camera.updateFrame(renderer);
+    goldenCoin.position.z += -0.01;
+    goldenCoin2.scale.add(new THREE.Vector3(0.0002, 0.0002, 0.0002));
+    console.log("Distance of the user from the origin:", totalDist);
+    if (totalDist > 1.6 && goldenCoin2.visible) {
+      goldenCoin2.visible = false;
+      goldenCoin.visible = true;
+      totalpoints += 1;
+      pointElement.textContent = `Points : ${totalpoints} `;
+    }
 
-  camera.updateFrame(renderer);
-
-  if (totalDist == 0.05) {
-    goldenCoin.visible = false;
-    totalpoints += 1;
-    pointElement.textContent = `Points : ${totalpoints} `;
+    // goldenCoin.position.z = -totalDist - 5;
   }
 
   renderer.render(scene, camera);
+
+  // Calculate the distance from the origin
+  // const distanceFromOrigin = calculateDistanceFromOrigin();
+  // console.log("Distance of the user from the origin:", distanceFromOrigin);
+
+  // if (checkUserARposeDist()) {
+  // }
 
   requestAnimationFrame(render);
 }
@@ -148,12 +181,12 @@ const distanceElement =
 
 getUserLocation(
   (coords) => {
-    console.log("Receiving coordinates:", coords);
+    // console.log("Receiving coordinates:", coords);
 
     // Check if we have previous coordinates to calculate distance
     if (lastKnownCoords) {
       const distance = calculateDistance(lastKnownCoords, coords);
-      console.log("Distance is:", distance);
+      // console.log("Distance is:", distance);
 
       // Update total distance
       totalDistance += distance;
@@ -173,6 +206,7 @@ getUserLocation(
     map.flyTo(markerLngLat, 15);
 
     lastKnownCoords = coords;
+    console.log("totalDistance", totalDistance);
     render(totalDistance);
   },
   (error) => {
