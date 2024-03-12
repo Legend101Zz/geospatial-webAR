@@ -97,11 +97,11 @@ const goldenMaterial = new THREE.MeshStandardMaterial({
 });
 
 const goldenMaterial2 = new THREE.MeshStandardMaterial({
-  color: 0x000, // Golden color
-  // emissive: 0xffd700,
+  color: 0xffd700, // Golden color
+  emissive: 0xffd700,
   metalness: 1,
   roughness: 0,
-  wireframe: true,
+  // wireframe: true,
   // map: texture,
 });
 const coinGeometry = new THREE.SphereGeometry(2, 32, 32);
