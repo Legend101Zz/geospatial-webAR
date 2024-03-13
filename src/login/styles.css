@@ -1,0 +1,164 @@
+@import url("https://fonts.googleapis.com/css2?family=Poppins&display=swap");
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "Poppins", sans-serif;
+}
+
+body {
+  background-color: #f2f2f2;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+}
+
+.container {
+  background-color: #fff;
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  max-width: 400px;
+  width: 100%;
+}
+
+.logo {
+  display: flex;
+  align-items: center;
+  margin-bottom: 5px;
+  margin-left: 100px;
+}
+
+.logo img {
+  height: 60px;
+  margin-right: 10px;
+}
+
+.logo h2 {
+  color: #333;
+  font-size: 24px;
+}
+
+h3 {
+  color: #ec4635;
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+form {
+  margin-bottom: 20px;
+}
+
+.input-field {
+  position: relative;
+  margin-bottom: 15px;
+}
+
+.input-field input {
+  width: 100%;
+  padding: 10px 10px 10px 35px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  outline: none;
+}
+
+.input-field .icon {
+  position: absolute;
+  left: 10px;
+  top: 50%;
+  transform: translateY(-50%);
+  color: #666;
+}
+
+.checkbox {
+  margin-bottom: 15px;
+}
+
+.checkbox input[type="checkbox"] {
+  margin-right: 5px;
+}
+
+.checkbox label {
+  font-size: 14px;
+  color: #666;
+}
+
+.register-btn {
+  width: 100%;
+  padding: 10px;
+  background-color: #ec4635;
+  color: #fff;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 16px;
+}
+
+p {
+  text-align: center;
+  margin-bottom: 10px;
+  color: #666;
+}
+
+.social-icons {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 20px;
+}
+
+.social-icons a {
+  margin: 0 10px;
+}
+
+.social-icons img {
+  height: 30px;
+}
+
+.login-link {
+  text-align: center;
+}
+
+.login-link a {
+  color: #ec4635;
+  text-decoration: none;
+}
+
+h3.bold-text {
+  color: #ec4635;
+  text-align: center;
+  margin-bottom: 20px;
+  font-weight: bold;
+}
+
+.input-field input {
+  width: 100%;
+  padding: 10px 10px 10px 35px;
+  border: 1px solid #ccc;
+  border-radius: 20px; /* Made input fields more round */
+  outline: none;
+}
+
+.checkbox {
+  margin-bottom: 10px; /* Made the checkbox margin smaller */
+  text-align: center; /* Center aligned the text */
+}
+
+.checkbox label {
+  font-size: 12px; /* Made the text smaller */
+  color: #666;
+}
+
+.register-btn {
+  width: 100%;
+  padding: 10px;
+  background-color: #ec4635;
+  color: #fff;
+  border: none;
+  border-radius: 2cap;
+  cursor: pointer;
+  font-size: 16px;
+}
+
+/* Add any additional styling as needed */
