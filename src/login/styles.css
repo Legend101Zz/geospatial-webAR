@@ -49,28 +49,36 @@ h3 {
 
 form {
   margin-bottom: 20px;
+  animation: fadeIn 1s ease-in-out;
 }
 
 .input-field {
   position: relative;
   margin-bottom: 15px;
+  animation: inputFieldAnimation 0.5s ease-in-out forwards;
 }
 
 .input-field input {
   width: 100%;
   padding: 10px 10px 10px 35px;
-  border: 1px solid #ccc;
-  border-radius: 5px;
+  border: 1px solid #8d45d5;
+  border-radius: 15px;
   outline: none;
 }
 
-.input-field .icon {
+.input-field img.icon-image {
   position: absolute;
   left: 10px;
   top: 50%;
-  transform: translateY(-50%);
-  color: #666;
+  transform: translateY(-50%) translateX(20%);
+  height: 15px;
+  animation: shake 0.5s ease-in-out 1s forwards,
+    moveOnly 0.5s ease-in-out 1.5s forwards;
 }
+
+/* .input-field:hover img.icon-image {
+  animation: shake 0.5s ease-in-out forwards;
+} */
 
 .checkbox {
   margin-bottom: 15px;
@@ -110,10 +118,15 @@ p {
 
 .social-icons a {
   margin: 0 10px;
+  border: 1px solid #8d45d5;
+  border-radius: 10px;
+  padding: 5px;
+  display: inline-block;
 }
 
 .social-icons img {
   height: 30px;
+  display: block;
 }
 
 .login-link {
@@ -129,24 +142,20 @@ h3.bold-text {
   color: #ec4635;
   text-align: center;
   margin-bottom: 20px;
-  font-weight: bold;
-}
-
-.input-field input {
-  width: 100%;
-  padding: 10px 10px 10px 35px;
-  border: 1px solid #ccc;
-  border-radius: 20px; /* Made input fields more round */
-  outline: none;
+  font-weight: 700;
 }
 
 .checkbox {
-  margin-bottom: 10px; /* Made the checkbox margin smaller */
-  text-align: center; /* Center aligned the text */
+  margin-bottom: 10px;
+  text-align: center;
+}
+.checkbox input[type="checkbox"] {
+  margin: 0;
+  transform: scale(0.83) translateY(20%);
 }
 
 .checkbox label {
-  font-size: 12px; /* Made the text smaller */
+  font-size: 10px;
   color: #666;
 }
 
@@ -161,4 +170,48 @@ h3.bold-text {
   font-size: 16px;
 }
 
-/* Add any additional styling as needed */
+/* Keyframes for input field animation */
+@keyframes inputFieldAnimation {
+  0% {
+    transform: translateY(-5px);
+    opacity: 0;
+  }
+  100% {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+/* Keyframes for form fade-in effect */
+@keyframes fadeIn {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
+/* Updated keyframes for shake animation */
+@keyframes shake {
+  0%,
+  100% {
+    transform: translateY(-50%) translateX(0);
+  }
+  25%,
+  75% {
+    transform: translateY(-50%) translateX(-1px);
+  }
+  50% {
+    transform: translateY(-50%) translateX(1px);
+  }
+}
+
+@keyframes moveOnly {
+  0% {
+    transform: translateY(-50%) translateX(-1px);
+  }
+  100% {
+    transform: translateY(-50%) translateX(20%);
+  }
+}

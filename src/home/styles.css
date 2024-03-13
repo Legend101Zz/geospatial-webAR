@@ -1,0 +1,297 @@
+@import url("https://fonts.googleapis.com/css2?family=Poppins&display=swap");
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "Poppins", sans-serif;
+}
+
+body {
+  background-color: #f2f2f2;
+}
+
+.container {
+  max-width: 500px;
+  margin: 0 auto;
+  background-color: #fff;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  border-radius: 10px;
+  overflow: hidden;
+  animation: fadeIn 0.5s ease-in-out;
+}
+
+@keyframes fadeIn {
+  0% {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Navbar */
+nav {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px 15px;
+  background-color: #f2f2f2;
+}
+
+.nav-left,
+.nav-right {
+  display: flex;
+  align-items: center;
+}
+
+.nav-icon {
+  font-size: 20px;
+  margin: 0 5px;
+}
+
+.nav-center {
+  font-weight: bold;
+}
+
+/* Main Content */
+.content {
+  padding: 15px;
+}
+
+.banner img {
+  width: 100%;
+  border-radius: 10px;
+}
+
+.points-info {
+  position: relative;
+  top: -30px;
+  left: 15px;
+  display: inline-block;
+  background-color: #fff;
+  padding: 10px 15px;
+  border-radius: 20px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.points {
+  font-weight: bold;
+  font-size: 18px;
+}
+
+.points-today {
+  font-size: 14px;
+  color: #666;
+}
+
+.calendar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 20px;
+  padding-bottom: 10px;
+  border-bottom: 1px solid #ccc;
+}
+
+.month {
+  font-weight: bold;
+}
+
+.days,
+.dates {
+  display: flex;
+}
+
+.days div,
+.dates div {
+  flex: 1;
+  text-align: center;
+  padding: 5px;
+}
+
+.current-day,
+.current-date {
+  background-color: #ec4635;
+  color: #fff;
+  border-radius: 50%;
+}
+
+.task-button {
+  margin-top: 20px;
+  background-color: #ec4635;
+  color: #fff;
+  padding: 15px;
+  border-radius: 10px;
+  text-align: center;
+}
+
+.task-button button {
+  background-color: transparent;
+  color: #fff;
+  border: none;
+  font-weight: bold;
+  font-size: 16px;
+  margin-bottom: 5px;
+  cursor: pointer;
+}
+
+.task-button span {
+  font-size: 14px;
+}
+
+.summary {
+  margin-top: 20px;
+  padding-bottom: 10px;
+  border-bottom: 1px solid #ccc;
+}
+
+.summary h3 {
+  display: inline-block;
+  margin-right: 10px;
+}
+
+.summary a {
+  color: #ec4635;
+  text-decoration: none;
+  font-size: 14px;
+}
+
+.summary-items {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 10px;
+}
+
+.item {
+  display: flex;
+  align-items: center;
+}
+
+.item img {
+  width: 30px;
+  height: 30px;
+  margin-right: 10px;
+}
+
+.item-info {
+  text-align: center;
+}
+
+.item-value {
+  font-weight: bold;
+  font-size: 18px;
+}
+
+.item-label {
+  font-size: 14px;
+  color: #666;
+}
+
+.points-circle {
+  position: relative;
+}
+
+.points-circle-inner {
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+  background-color: #ec4635;
+  color: #fff;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.points-circle-value {
+  font-weight: bold;
+  font-size: 24px;
+}
+
+.points-circle-label {
+  font-size: 12px;
+}
+
+.history {
+  margin-top: 20px;
+  padding-bottom: 10px;
+  border-bottom: 1px solid #ccc;
+}
+
+.history h3 {
+  display: inline-block;
+  margin-right: 10px;
+}
+
+.history a {
+  color: #ec4635;
+  text-decoration: none;
+  font-size: 14px;
+}
+
+.history-item {
+  display: flex;
+  align-items: center;
+  margin-top: 10px;
+}
+
+.history-item img {
+  width: 60px;
+  height: 60px;
+  border-radius: 10px;
+  margin-right: 10px;
+}
+
+.history-info {
+  display: flex;
+  flex-direction: column;
+}
+
+.history-title {
+  font-weight: bold;
+}
+
+.history-distance {
+  font-size: 14px;
+  color: #666;
+}
+
+.nav-buttons {
+  display: flex;
+  justify-content: space-around;
+  margin-top: 20px;
+}
+
+.nav-button {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-decoration: none;
+  color: #333;
+  font-size: 12px;
+}
+
+.nav-button img {
+  width: 30px;
+  height: 30px;
+  margin-bottom: 5px;
+}
+
+.ar-run-button {
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  background-color: #ec4635;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+}
+
+.ar-run-button img {
+  width: 40px;
+  height: 40px;
+}
