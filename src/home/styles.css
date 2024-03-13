@@ -88,12 +88,14 @@ nav {
 }
 
 .calendar {
+  margin-top: 20px;
+}
+
+.calendar-header {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  margin-top: 20px;
-  padding-bottom: 10px;
-  border-bottom: 1px solid #ccc;
+  margin-bottom: 10px;
 }
 
 .month {
@@ -141,14 +143,7 @@ nav {
 .task-button span {
   font-size: 14px;
 }
-
-.summary {
-  margin-top: 20px;
-  padding-bottom: 10px;
-  border-bottom: 1px solid #ccc;
-}
-
-.summary h3 {
+summary h3 {
   display: inline-block;
   margin-right: 10px;
 }
@@ -157,46 +152,73 @@ nav {
   color: #ec4635;
   text-decoration: none;
   font-size: 14px;
+  margin-bottom: 10px;
+  display: block;
+  left: 290px;
+  margin-top: -20px;
+  position: absolute;
 }
 
 .summary-items {
   display: flex;
   justify-content: space-between;
+  align-items: center;
+  flex-direction: column;
   margin-top: 10px;
 }
 
 .item {
+  text-align: center;
+  margin-bottom: 10px;
+}
+
+.item-info {
   display: flex;
+  justify-content: center;
   align-items: center;
 }
 
 .item img {
   width: 30px;
   height: 30px;
-  margin-right: 10px;
+  margin-right: 10px; /* Add margin to separate image from text */
 }
 
-.item-info {
+.items {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
   text-align: center;
+}
+
+.item-label,
+.item-value {
+  width: 100%; /* Ensure both label and value take full width */
+}
+
+.item-label {
+  font-size: 14px;
+  color: #000;
+  font-weight: bolder;
+  margin-bottom: 5px; /* Add a small margin between label and value */
 }
 
 .item-value {
   font-weight: bold;
   font-size: 18px;
-}
-
-.item-label {
-  font-size: 14px;
-  color: #666;
+  color: #ec4635;
+  animation: animateValue 2s ease-out;
+  animation-fill-mode: forwards;
+  opacity: 0;
 }
 
 .points-circle {
-  position: relative;
+  margin-top: 40px;
 }
 
 .points-circle-inner {
-  width: 80px;
-  height: 80px;
+  width: 120px;
+  height: 120px;
   border-radius: 50%;
   background-color: #ec4635;
   color: #fff;
@@ -205,14 +227,20 @@ nav {
   justify-content: center;
   align-items: center;
 }
-
+.allitems {
+  display: flex;
+  width: 100%;
+  justify-content: space-around;
+}
+.points-circle-label {
+  font-size: 16px;
+}
+.points-circle {
+  display: flex;
+}
 .points-circle-value {
   font-weight: bold;
-  font-size: 24px;
-}
-
-.points-circle-label {
-  font-size: 12px;
+  font-size: 28px;
 }
 
 .history {
@@ -263,6 +291,10 @@ nav {
   display: flex;
   justify-content: space-around;
   margin-top: 20px;
+  background-color: #fff;
+  box-shadow: 0 -5px 10px rgba(0, 0, 0, 0.1);
+  z-index: 1000;
+  border-radius: 20px;
 }
 
 .nav-button {
@@ -272,26 +304,41 @@ nav {
   text-decoration: none;
   color: #333;
   font-size: 12px;
+  margin-right: 10px;
+}
+
+.nav-button:last-child {
+  margin-right: 0; /* Remove the margin from the last nav button */
 }
 
 .nav-button img {
-  width: 30px;
-  height: 30px;
+  width: 20px;
+  height: 20px;
   margin-bottom: 5px;
 }
 
 .ar-run-button {
-  width: 60px;
-  height: 60px;
+  width: 100px;
+  height: 100px;
   border-radius: 50%;
   background-color: #ec4635;
   display: flex;
   justify-content: center;
   align-items: center;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+  position: absolute;
+  bottom: -100px;
+  left: 50%;
+  transform: translateX(-50%);
 }
 
 .ar-run-button img {
   width: 40px;
   height: 40px;
+}
+
+@keyframes animateValue {
+  to {
+    opacity: 1;
+  }
 }
