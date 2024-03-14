@@ -6,6 +6,57 @@ window.addEventListener("load", function () {
     container.style.display = "block";
   }, 1000); // Delay of 1 second (1000 milliseconds)
 });
+// Call the function to start the animation
+
+animateItemValues();
+
+// Get the modal
+const modal = document.getElementById("trackModal");
+
+// Get the button that opens the modal
+const arRunButton = document.querySelector(".ar-run-button");
+
+// Get the <span> element that closes the modal
+const closeBtn = document.getElementsByClassName("close-btn")[0];
+
+// Get the AR Run SVG element
+const arRunSvg = document.getElementById("ar-run-svg");
+
+// When the user clicks the AR Run button, open the modal
+arRunButton.onclick = function () {
+  modal.style.display = "block";
+  animateArRunButton();
+};
+
+// When the user clicks on the close button, close the modal
+closeBtn.onclick = function () {
+  modal.style.display = "none";
+  stopArRunAnimation();
+};
+
+// When the user clicks anywhere outside of the modal, close it
+window.onclick = function (event) {
+  if (event.target == modal) {
+    modal.style.display = "none";
+    stopArRunAnimation();
+  }
+};
+
+// Animation for the AR Run button
+function animateArRunButton() {
+  arRunSvg.style.animation = "jump 0.5s infinite";
+}
+
+// Stop the AR Run button animation
+function stopArRunAnimation() {
+  arRunSvg.style.animation = "none";
+}
+
+const completeDay = document.querySelector(".complete_day");
+
+function addClass() {
+  completeDay.classList.toggle("active");
+}
 
 const calendarHeader = document.querySelector(".calendar-header");
 const days = document.querySelector(".days");
@@ -75,7 +126,3 @@ function animateItemValues() {
     }
   }, 5);
 }
-
-// Call the function to start the animation
-
-animateItemValues();

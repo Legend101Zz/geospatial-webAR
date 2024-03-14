@@ -126,6 +126,8 @@ nav {
   background-color: #ec4635;
   color: #fff;
   padding: 15px;
+  display: flex;
+  flex-direction: column;
   border-radius: 10px;
   text-align: center;
 }
@@ -134,14 +136,19 @@ nav {
   background-color: transparent;
   color: #fff;
   border: none;
+  align-self: flex-start;
   font-weight: bold;
   font-size: 16px;
   margin-bottom: 5px;
   cursor: pointer;
 }
-
+.active {
+  color: #ec4635;
+}
 .task-button span {
   font-size: 14px;
+  align-self: flex-start;
+  font-weight: 200;
 }
 summary h3 {
   display: inline-block;
@@ -291,10 +298,11 @@ summary h3 {
   display: flex;
   justify-content: space-around;
   margin-top: 20px;
-  background-color: #fff;
+  background-color: #a7a6a6;
   box-shadow: 0 -5px 10px rgba(0, 0, 0, 0.1);
   z-index: 1000;
   border-radius: 20px;
+  align-items: center;
 }
 
 .nav-button {
@@ -304,7 +312,6 @@ summary h3 {
   text-decoration: none;
   color: #333;
   font-size: 12px;
-  margin-right: 10px;
 }
 
 .nav-button:last-child {
@@ -323,13 +330,12 @@ summary h3 {
   border-radius: 50%;
   background-color: #ec4635;
   display: flex;
+  flex-direction: column;
+  color: #fff;
   justify-content: center;
   align-items: center;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
-  position: absolute;
-  bottom: -100px;
-  left: 50%;
-  transform: translateX(-50%);
+  transform: translateY(-20%);
 }
 
 .ar-run-button img {
@@ -337,8 +343,160 @@ summary h3 {
   height: 40px;
 }
 
+/* Modal Styles */
+.modal {
+  display: none;
+  position: fixed;
+  z-index: 1;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  overflow: auto;
+  background-color: rgba(0, 0, 0, 0.4);
+}
+
+.modal-content {
+  background-color: rgba(59, 59, 59, 0.8);
+  margin: 0 auto;
+  padding: 20px;
+  border: 1px solid #888;
+  border-radius: 10px;
+  width: 80%;
+  max-width: 600px;
+  position: relative;
+  animation: slide-down 0.5s ease-in-out;
+  top: 50%;
+  transform: translateY(-50%);
+}
+
+.modal-options {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 20px;
+  background-color: #ec4635; 
+  padding: 10px; 
+  border-radius: 10px; 
+}
+
+.modal-option {
+  border-radius: 10px;
+  font-size: 10px;
+  padding: 10px 20px;
+  background-color: #fff; 
+  color: #ec4635; 
+  border: 2px solid transparent; 
+  cursor: pointer;
+  margin-bottom: 10px;
+}
+
+.modal-option:last-child {
+  margin-bottom: 0;
+}
+
+@keyframes slide-down {
+  0% {
+    transform: translateY(-100%);
+  }
+  100% {
+    transform: translateY(-50%);
+  }
+}
+
+.close-btn {
+  color: #aaa;
+  float: right;
+  font-size: 28px;
+  font-weight: bold;
+}
+
+.close-btn:hover,
+.close-btn:focus {
+  color: black;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+.modal-image-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 300px;
+}
+
+.modal-image-container img {
+  max-width: 100%;
+  max-height: 100%;
+  margin: 0 10px;
+}
+
+.modal-options {
+  display: flex;
+  justify-content: space-around;
+  margin-top: 20px;
+}
+
+.modal-option {
+  padding: 10px 20px;
+  border: none;
+  background-color: #ec4635;
+  color: #fff;
+  cursor: pointer;
+}
+
 @keyframes animateValue {
   to {
     opacity: 1;
   }
+}
+
+/* Larger than 768px */
+@media only screen and (min-width: 768px) {
+  .nav-button img {
+    width: 30px;
+    height: 30px;
+  }
+
+  .ar-run-button {
+    bottom: -70px;
+  }
+}
+
+/* Larger than 1024px */
+@media only screen and (min-width: 1024px) {
+  .nav-button img {
+    width: 40px;
+    height: 40px;
+  }
+
+  .ar-run-button {
+    bottom: -50px;
+  }
+}
+
+.claendeer-section {
+  display: flex;
+  justify-content: space-between;
+}
+
+.month-selector {
+  width: 1rem;
+  align-self: center;
+}
+.days {
+  display: flex;
+}
+.complete-day {
+  display: flex;
+  flex-direction: column;
+  font-size: 0.76rem;
+}
+.complete-day:hover {
+  color: #ec4635;
+}
+#gMonth2 {
+  border: none;
+  width: 3rem;
+  border-right: 1px solid #999;
 }

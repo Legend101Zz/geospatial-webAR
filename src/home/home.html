@@ -30,7 +30,7 @@
             <div class="points-today">+12,240 today &rarr;</div>
           </div> -->
         </div>
-
+        <!-- 
         <div class="calendar">
           <div class="calendar-header">
             <div class="month">Feb <span class="nav-icon">&#9662;</span></div>
@@ -45,7 +45,7 @@
             </div>
           </div>
           <div class="dates">
-            <div>19</div>
+            <div>19</div>x
             <div>20</div>
             <div class="current-date">21</div>
             <div>22</div>
@@ -53,8 +53,56 @@
             <div>24</div>
             <div>25</div>
           </div>
+        </div> -->
+        <div class="claendeer-section">
+          <div class="month-selector">
+            <select id="gMonth2" onchange="show_month()">
+              <!-- <option value="">--Select Month--</option> -->
+              <option selected value="1">Jan</option>
+              <option default value="Feb">Feb</option>
+              <option value="3">March</option>
+              <option value="4">April</option>
+              <option value="5">May</option>
+              <option value="6">June</option>
+              <option value="7">July</option>
+              <option value="8">Aug</option>
+              <option value="9">Sept</option>
+              <option value="10">Oct</option>
+              <option value="11">Nov</option>
+              <option value="12">Dec</option>
+            </select>
+          </div>
+          <div class="days">
+            <div class="complete-day">
+              <div class="day">Mon</div>
+              <div class="date">19</div>
+            </div>
+            <div class="complete-day active">
+              <div class="day">Tue</div>
+              <div class="date">20</div>
+            </div>
+            <div class="complete-day">
+              <div class="day">Wed</div>
+              <div class="date">21</div>
+            </div>
+            <div class="complete-day">
+              <div class="day">Thu</div>
+              <div class="date">22</div>
+            </div>
+            <div class="complete-day">
+              <div class="day">Fri</div>
+              <div class="date">23</div>
+            </div>
+            <div class="complete-day">
+              <div class="day">Sat</div>
+              <div class="date">24</div>
+            </div>
+            <div class="complete-day">
+              <div class="day">Sun</div>
+              <div class="date">25</div>
+            </div>
+          </div>
         </div>
-
         <div class="task-button">
           <button>Complete Tasks</button>
           <span>Earn More Points with complete our task</span>
@@ -125,7 +173,19 @@
             <span>Activity</span>
           </a>
           <div class="ar-run-button">
-            <img src="../../assets/ar.svg" alt="AR Run" />
+            <svg id="ar-run-svg" viewBox="0 0 40 40">
+              <path
+                d="M20,0C8.96,0,0,8.96,0,20s8.96,20,20,20s20-8.96,20-20S31.04,0,20,0z M20,38c-9.92,0-18-8.08-18-18S10.08,2,20,2
+                    s18,8.08,18,18S29.92,38,20,38z"
+              />
+              <path
+                d="M22.5,22h-5c-0.27,0-0.5-0.23-0.5-0.5V13c0-0.27,0.23-0.5,0.5-0.5h5c0.27,0,0.5,0.23,0.5,0.5v8.5
+                    C23,21.77,22.77,22,22.5,22z M18,21h4v-7h-4V21z"
+              />
+              <path
+                d="M20,28c-0.55,0-1-0.45-1-1v-3c0-0.55,0.45-1,1-1s1,0.45,1,1v3C21,27.55,20.55,28,20,28z"
+              />
+            </svg>
             <span>AR Run</span>
           </div>
           <a href="#" class="nav-button">
@@ -136,6 +196,23 @@
             <img src="../../assets/profile2.png" alt="Profile" />
             <span>Profile</span>
           </a>
+        </div>
+        <!-- Modal -->
+        <div class="modal" id="trackModal">
+          <div class="modal-content">
+            <span class="close-btn">&times;</span>
+            <div class="modal-image-container">
+              <img src="../../assets/runner.png" alt="Modal Image 1" />
+            </div>
+            <div class="modal-options">
+              <button class="modal-option">
+                Yes, choose a running track for me!
+              </button>
+              <button class="modal-option">
+                No, I will choose my own track
+              </button>
+            </div>
+          </div>
         </div>
       </div>
     </div>
