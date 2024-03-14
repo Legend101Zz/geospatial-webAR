@@ -13,12 +13,15 @@ body {
 
 .container {
   max-width: 500px;
+  /* height: 90vh; */
   margin: 0 auto;
   background-color: #fff;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
   border-radius: 10px;
-  overflow: hidden;
+  /* overflow: hidden; */
   animation: fadeIn 0.5s ease-in-out;
+  display: flex;
+  flex-direction: column;
 }
 
 @keyframes fadeIn {
@@ -58,7 +61,10 @@ nav {
 
 /* Main Content */
 .content {
-  padding: 15px;
+  padding: 5px 15px;
+  display: flex;
+  flex-direction: column;
+  /* height: 90vh; */
 }
 
 .banner img {
@@ -122,7 +128,7 @@ nav {
 }
 
 .task-button {
-  margin-top: 20px;
+  /* margin-top: 20px; */
   background-color: #ec4635;
   color: #fff;
   padding: 15px;
@@ -131,7 +137,9 @@ nav {
   border-radius: 10px;
   text-align: center;
 }
-
+.summary {
+  margin-top: -15px;
+}
 .task-button button {
   background-color: transparent;
   color: #fff;
@@ -207,6 +215,7 @@ summary h3 {
   font-size: 14px;
   color: #000;
   font-weight: bolder;
+
   margin-bottom: 5px; /* Add a small margin between label and value */
 }
 
@@ -297,12 +306,13 @@ summary h3 {
 .nav-buttons {
   display: flex;
   justify-content: space-around;
-  margin-top: 20px;
+  /* margin-top: 20px; */
   background-color: #a7a6a6;
   box-shadow: 0 -5px 10px rgba(0, 0, 0, 0.1);
   z-index: 1000;
   border-radius: 20px;
   align-items: center;
+  z-index: 999;
 }
 
 .nav-button {
@@ -362,35 +372,46 @@ summary h3 {
   padding: 20px;
   border: 1px solid #888;
   border-radius: 10px;
-  width: 80%;
-  max-width: 600px;
   position: relative;
+  width: 100%;
+  height: 100%;
   animation: slide-down 0.5s ease-in-out;
-  top: 50%;
-  transform: translateY(-50%);
+  z-index: 1;
 }
 
 .modal-options {
   display: flex;
   flex-direction: column;
   align-items: center;
+  justify-content: center;
+  align-self: center;
   margin-top: 20px;
-  background-color: #ec4635; 
-  padding: 10px; 
-  border-radius: 10px; 
+  background-color: #ec4635;
+  padding: 10px;
+  border-radius: 10px;
+  /* margin-top: 4rem; */
 }
 
 .modal-option {
   border-radius: 10px;
   font-size: 10px;
   padding: 10px 20px;
-  background-color: #fff; 
-  color: #ec4635; 
-  border: 2px solid transparent; 
+  background-color: #fff !important;
+  color: rgb(5, 5, 5);
+  border: 2px solid transparent;
   cursor: pointer;
   margin-bottom: 10px;
 }
 
+.modal-option:focus {
+  background-color: #a22f23 !important;
+  color: #fff;
+}
+.modal-option:hover {
+  /* Change background color on hover or focus */
+  color: #fff;
+  background-color: #a22f23 !important; /* Change text color */
+}
 .modal-option:last-child {
   margin-bottom: 0;
 }
@@ -400,7 +421,7 @@ summary h3 {
     transform: translateY(-100%);
   }
   100% {
-    transform: translateY(-50%);
+    transform: translateY(-0%);
   }
 }
 
@@ -423,26 +444,13 @@ summary h3 {
   justify-content: center;
   align-items: center;
   height: 300px;
+  margin-top: 8.5rem;
 }
 
 .modal-image-container img {
   max-width: 100%;
   max-height: 100%;
   margin: 0 10px;
-}
-
-.modal-options {
-  display: flex;
-  justify-content: space-around;
-  margin-top: 20px;
-}
-
-.modal-option {
-  padding: 10px 20px;
-  border: none;
-  background-color: #ec4635;
-  color: #fff;
-  cursor: pointer;
 }
 
 @keyframes animateValue {
