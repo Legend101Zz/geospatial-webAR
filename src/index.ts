@@ -120,20 +120,25 @@ const goldenCoin2 = new THREE.Mesh(coinGeometry, goldenMaterial2);
 goldenCoin2.visible = false;
 instantTrackerGroup.add(goldenCoin2);
 
+// Create a thin strip
+const stripGeometry = new THREE.PlaneGeometry(10, 1);
+const stripMaterial = new THREE.MeshBasicMaterial({ color: 0x00ff00 });
+const strip = new THREE.Mesh(stripGeometry, stripMaterial);
+// strip.position.set(0, -window.innerHeight / 2 + 20, 0); // Position the strip at the bottom of the screen
+instantTrackerGroup.add(strip);
 
-
-const triangleShape = new THREE.Shape();
-triangleShape.moveTo(0, 0);
-triangleShape.lineTo(-1, 1);
-triangleShape.lineTo(1, 1);
-triangleShape.lineTo(0, 0);
-const triangleGeometry = new THREE.ShapeGeometry(triangleShape);
-const triangleMaterial = new THREE.MeshBasicMaterial({ color: 0x0000ff });
-const triangle = new THREE.Mesh(triangleGeometry, triangleMaterial);
-scene.add(triangle);
-
-// Position the triangle arrow at the bottom of the scene
-triangle.position.y = -window.innerHeight / 2 + triangle.geometry.parameters.height / 2;
+// Create small arrows
+const arrowGeometry = new THREE.ConeGeometry(0.2, 0.5, 8);
+const arrowMaterial = new THREE.MeshBasicMaterial({ color: 0xffffff });
+const arrows: any = [];
+const arrowCount = 10;
+const gap = 1; // Gap between arrows
+for (let i = 0; i < arrowCount; i++) {
+  const arrow = new THREE.Mesh(arrowGeometry, arrowMaterial);
+  arrow.position.set(i * gap - (arrowCount / 2) * gap, 0, 0); // Position arrows horizontally
+  strip.add(arrow); // Add arrows to the strip
+  arrows.push(arrow);
+}
 
 const directionalLight = new THREE.DirectionalLight("white", 0.8);
 directionalLight.position.set(0, 5, 0);
@@ -160,6 +165,9 @@ function render(totalDist: number): void {
     if (coinModel) {
       coinModel.rotation.y += 0.01;
     }
+    arrows.forEach((arrow: any) => {
+      arrow.rotation.z += 0.1;
+    });
     camera.updateFrame(renderer);
   } else {
     totalDist = totalDist / 10000;
