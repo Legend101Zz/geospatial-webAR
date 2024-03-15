@@ -18,6 +18,7 @@ if (ZapparThree.browserIncompatible()) {
 
 let totalDistance = 0;
 let totalpoints = 0;
+let coinModel: THREE.Group;
 // Get the HTML element to display points
 const pointElement =
   document.getElementById("points") || document.createElement("div");
@@ -74,6 +75,7 @@ const gltfLoader = new GLTFLoader(manager);
 gltfLoader.load(
   model,
   (gltf) => {
+    coinModel = gltf.scene;
     instantTrackerGroup.add(gltf.scene);
   },
   undefined,
@@ -115,15 +117,30 @@ instantTrackerGroup.add(goldenCoin);
 const goldenCoin2 = new THREE.Mesh(coinGeometry, goldenMaterial2);
 // goldenCoin2.position.z = -3;
 // goldenCoin2.position.y = 2;
-goldenCoin2.visible = true;
+goldenCoin2.visible = false;
 instantTrackerGroup.add(goldenCoin2);
+
+
+
+const triangleShape = new THREE.Shape();
+triangleShape.moveTo(0, 0);
+triangleShape.lineTo(-1, 1);
+triangleShape.lineTo(1, 1);
+triangleShape.lineTo(0, 0);
+const triangleGeometry = new THREE.ShapeGeometry(triangleShape);
+const triangleMaterial = new THREE.MeshBasicMaterial({ color: 0x0000ff });
+const triangle = new THREE.Mesh(triangleGeometry, triangleMaterial);
+scene.add(triangle);
+
+// Position the triangle arrow at the bottom of the scene
+triangle.position.y = -window.innerHeight / 2 + triangle.geometry.parameters.height / 2;
 
 const directionalLight = new THREE.DirectionalLight("white", 0.8);
 directionalLight.position.set(0, 5, 0);
 directionalLight.lookAt(0, 0, 0);
 instantTrackerGroup.add(directionalLight);
 
-const ambientLight = new THREE.AmbientLight("white", 0.4);
+const ambientLight = new THREE.AmbientLight("white", 1);
 instantTrackerGroup.add(ambientLight);
 
 // When the experience loads we'll let the user choose a place in their room for
@@ -140,6 +157,9 @@ placeButton.addEventListener("click", () => {
 function render(totalDist: number): void {
   if (!hasPlaced) {
     instantTrackerGroup.setAnchorPoseFromCameraOffset(0, 0, -15);
+    if (coinModel) {
+      coinModel.rotation.y += 0.01;
+    }
     camera.updateFrame(renderer);
   } else {
     totalDist = totalDist / 10000;
