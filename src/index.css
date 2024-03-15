@@ -1,24 +1,54 @@
+@import url("https://fonts.googleapis.com/css2?family=Poppins&display=swap");
+
 html,
 body {
   margin: 0;
   padding: 0;
   width: 100%;
   height: 100%;
+  font-family: "Poppins", sans-serif;
 }
-#tap-to-place {
+
+.task-button {
+  /* margin-top: 20px; */
   position: fixed;
-  bottom: 100px;
+
+  color: #fff;
+  padding: 15px;
+  display: flex;
+  flex-direction: column;
+  border-radius: 10px;
+  text-align: center;
+  background-color: rgba(59, 59, 59, 0.4);
+  bottom: 50px;
   left: 50%;
   right: 0px;
   border-radius: 15px;
-  background: black;
+  transform: translateX(-15%);
+  box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
+  border: 2px solid rgba(255, 255, 255, 0.5);
   color: white;
-  width: 200px;
+  width: 300px;
+  height: 200px;
   margin-left: -100px;
   text-align: center;
   padding: 15px;
   box-sizing: border-box;
-  font-family: sans-serif;
+}
+#tap-to-place {
+  bottom: 10px;
+  left: 50%;
+  right: 0px;
+  border-radius: 15px;
+  background: #ec4635;
+  color: white;
+  font-weight: 900;
+  width: 200px;
+  margin-left: 20px;
+  text-align: center;
+  padding: 20px;
+  box-sizing: border-box;
+
   text-transform: uppercase;
 }
 
@@ -54,6 +84,81 @@ body {
   box-sizing: border-box;
   font-family: sans-serif;
   text-transform: uppercase;
+}
+
+.stats-container {
+  position: fixed;
+  top: 10px;
+  left: 10px;
+  right: 10px;
+  display: flex;
+  width: 200px;
+  height: auto;
+  flex-direction: column;
+  align-items: center;
+  z-index: 999;
+  border-radius: 10px;
+}
+
+.translucent-bg {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.5);
+  box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
+  border: 2px solid rgba(255, 255, 255, 0.5);
+  border-radius: 10px;
+  z-index: -1;
+}
+
+.stat-row {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+  margin-bottom: 10px;
+}
+
+.stat-item {
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  align-items: flex-start;
+  color: #fff;
+  text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
+}
+
+.stat-icon {
+  width: 32px;
+  height: 32px;
+  margin-top: 5px;
+  margin-right: 20px;
+  margin-left: 10px;
+}
+
+.stat-value {
+  font-size: 8px;
+  font-weight: bold;
+  margin-right: 5px;
+  margin-left: 10px;
+  margin-bottom: 5px;
+}
+
+.stat-label {
+  font-size: 6px;
+  margin-right: 20px;
+  margin-left: 10px;
+  /* margin-top: 2px; */
+}
+
+.asics-logo {
+  margin-bottom: 10px;
+}
+
+.asics-logo img {
+  width: 80px;
+  height: auto;
 }
 
 #map-container {

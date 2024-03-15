@@ -7,7 +7,7 @@ import {
   calculateDistance,
 } from "./location-tracking";
 import { initializeMap } from "./mapbox";
-const model = new URL("../assets/waving.glb", import.meta.url).href;
+const model = new URL("../assets/goldencoin.glb", import.meta.url).href;
 const coin = new URL("../assets/coin.png", import.meta.url).href;
 import "./index.css";
 
@@ -69,18 +69,18 @@ const instantTrackerGroup = new ZapparThree.InstantWorldAnchorGroup(
 
 scene.add(instantTrackerGroup);
 
-// const gltfLoader = new GLTFLoader(manager);
+const gltfLoader = new GLTFLoader(manager);
 
-// gltfLoader.load(
-//   model,
-//   (gltf) => {
-//     instantTrackerGroup.add(gltf.scene);
-//   },
-//   undefined,
-//   () => {
-//     console.log("An error ocurred loading the GLTF model");
-//   }
-// );
+gltfLoader.load(
+  model,
+  (gltf) => {
+    instantTrackerGroup.add(gltf.scene);
+  },
+  undefined,
+  () => {
+    console.log("An error ocurred loading the GLTF model");
+  }
+);
 
 // adding objects
 
@@ -140,6 +140,7 @@ placeButton.addEventListener("click", () => {
 function render(totalDist: number): void {
   if (!hasPlaced) {
     instantTrackerGroup.setAnchorPoseFromCameraOffset(0, 0, -15);
+    camera.updateFrame(renderer);
   } else {
     totalDist = totalDist / 10000;
     camera.updateFrame(renderer);
@@ -169,8 +170,8 @@ function render(totalDist: number): void {
 }
 
 // Get the map and marker from initializeMap function
-const map = initializeMap();
-const marker = map.getMarker();
+// const map = initializeMap();
+// const marker = map.getMarker();
 
 let lastKnownCoords: Coordinates | null = null;
 const distanceThreshold = 1; //in kilometers
@@ -200,10 +201,10 @@ getUserLocation(
       }
     }
 
-    const { latitude, longitude } = coords;
-    const markerLngLat: [number, number] = [longitude, latitude];
-    marker.setLngLat(markerLngLat);
-    map.flyTo(markerLngLat, 15);
+    // const { latitude, longitude } = coords;
+    // // const markerLngLat: [number, number] = [longitude, latitude];
+    // // // marker.setLngLat(markerLngLat);
+    // // // map.flyTo(markerLngLat, 15);
 
     lastKnownCoords = coords;
     console.log("totalDistance", totalDistance);
