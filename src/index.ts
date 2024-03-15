@@ -92,10 +92,11 @@ gltfLoader.load(
 gltfLoader.load(
   model2,
   (gltf) => {
-    coinModel = gltf.scene;
-    coinModel.scale.set(0.5, 0.5, 0.5);
-    coinModel.position.z = -1;
-    coinModel.position.y = 1;
+    keyModel = gltf.scene;
+    keyModel.scale.set(0.5, 0.5, 0.5);
+    keyModel.position.z = -1;
+    keyModel.position.y = 1;
+    keyModel.visible = false;
     instantTrackerGroup.add(gltf.scene);
   },
   undefined,
@@ -226,8 +227,9 @@ function render(totalDist: number): void {
     });
     camera.updateFrame(renderer);
   } else {
-    if (coinModel) {
+    if (coinModel && keyModel) {
       coinModel.rotation.y += 0.01;
+      keyModel.rotation.y += 0.01;
     }
     arrows.forEach((arrow: any) => {
       arrow.position.x += 0.009; // Move arrows horizontally
@@ -238,12 +240,12 @@ function render(totalDist: number): void {
     });
     totalDist = totalDist / 10000;
     camera.updateFrame(renderer);
-    goldenCoin.position.z += -0.01;
-    goldenCoin2.scale.add(new THREE.Vector3(0.0002, 0.0002, 0.0002));
+    keyModel.position.z += -0.01;
+    coinModel.scale.add(new THREE.Vector3(0.0002, 0.0002, 0.0002));
     console.log("Distance of the user from the origin:", totalDist);
-    if (totalDist > 1.6 && goldenCoin2.visible) {
-      goldenCoin2.visible = false;
-      goldenCoin.visible = true;
+    if (totalDist > 1.6 && coinModel.visible) {
+      coinModel.visible = false;
+      keyModel.visible = true;
       totalpoints += 1;
       pointElement.textContent = `Points : ${totalpoints} `;
     }
