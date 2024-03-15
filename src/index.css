@@ -94,9 +94,11 @@ body {
   width: 200px;
   height: 120px;
   flex-direction: column;
+  justify-content: space-evenly;
   align-items: center;
   z-index: 999;
   border-radius: 10px;
+  padding: 5px;
 }
 
 .translucent-bg {
@@ -111,12 +113,16 @@ body {
   border-radius: 10px;
   z-index: -1;
 }
-
+.mrigu {
+  display: flex;
+  flex-direction: column-reverse;
+}
 .stat-row {
   display: flex;
-  justify-content: column;
+  /* justify-content: column; */
+  justify-content: space-between;
   width: 100%;
-  margin-bottom: 30px;
+  /* margin-bottom: 30px; */
 }
 
 .stat-item {
@@ -144,7 +150,7 @@ body {
 }
 
 .asics-logo {
-  margin-top: auto;
+  /* margin-top: auto; */
 }
 
 .asics-logo img {

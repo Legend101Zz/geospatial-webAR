@@ -8,6 +8,7 @@ import {
 } from "./location-tracking";
 import { initializeMap } from "./mapbox";
 const model = new URL("../assets/goldencoin.glb", import.meta.url).href;
+const model2 = new URL("../assets/goldenkey.glb", import.meta.url).href;
 const coin = new URL("../assets/coin.png", import.meta.url).href;
 import "./index.css";
 
@@ -19,6 +20,7 @@ if (ZapparThree.browserIncompatible()) {
 let totalDistance = 0;
 let totalpoints = 0;
 let coinModel: THREE.Group;
+let keyModel: THREE.Group;
 // Get the HTML element to display points
 const pointElement =
   document.getElementById("points") || document.createElement("div");
@@ -77,6 +79,23 @@ gltfLoader.load(
   (gltf) => {
     coinModel = gltf.scene;
     coinModel.scale.set(0.5, 0.5, 0.5);
+    coinModel.position.z = -1;
+    coinModel.position.y = 1;
+    instantTrackerGroup.add(gltf.scene);
+  },
+  undefined,
+  () => {
+    console.log("An error ocurred loading the GLTF model");
+  }
+);
+
+gltfLoader.load(
+  model2,
+  (gltf) => {
+    coinModel = gltf.scene;
+    coinModel.scale.set(0.5, 0.5, 0.5);
+    coinModel.position.z = -1;
+    coinModel.position.y = 1;
     instantTrackerGroup.add(gltf.scene);
   },
   undefined,
@@ -88,41 +107,41 @@ gltfLoader.load(
 // adding objects
 
 // Loading texture image for the golden material
-const textureLoader = new THREE.TextureLoader();
-const texture = textureLoader.load(coin);
+// const textureLoader = new THREE.TextureLoader();
+// const texture = textureLoader.load(coin);
 
-const goldenMaterial = new THREE.MeshStandardMaterial({
-  // color: 0xffd700, // Golden color
-  emissive: 0xffd700,
-  // metalness: 1,
-  // roughness: 0,
-  map: texture,
-});
+// const goldenMaterial = new THREE.MeshStandardMaterial({
+//   // color: 0xffd700, // Golden color
+//   emissive: 0xffd700,
+//   // metalness: 1,
+//   // roughness: 0,
+//   map: texture,
+// });
 
-const goldenMaterial2 = new THREE.MeshStandardMaterial({
-  color: 0xffd700, // Golden color
-  emissive: 0xffd700,
-  metalness: 1,
-  roughness: 0,
-  // wireframe: true,
-  // map: texture,
-});
-const coinGeometry = new THREE.SphereGeometry(2, 32, 32);
-const goldenCoin = new THREE.Mesh(coinGeometry, goldenMaterial);
-// goldenCoin.position.z = -3;
-goldenCoin.visible = false;
-instantTrackerGroup.add(goldenCoin);
+// const goldenMaterial2 = new THREE.MeshStandardMaterial({
+//   color: 0xffd700, // Golden color
+//   emissive: 0xffd700,
+//   metalness: 1,
+//   roughness: 0,
+//   // wireframe: true,
+//   // map: texture,
+// });
+// const coinGeometry = new THREE.SphereGeometry(2, 32, 32);
+// const goldenCoin = new THREE.Mesh(coinGeometry, goldenMaterial);
+// // goldenCoin.position.z = -3;
+// goldenCoin.visible = false;
+// instantTrackerGroup.add(goldenCoin);
 
-// golden coin 2
+// // golden coin 2
 
-const goldenCoin2 = new THREE.Mesh(coinGeometry, goldenMaterial2);
-// goldenCoin2.position.z = -3;
-// goldenCoin2.position.y = 2;
-goldenCoin2.visible = false;
-instantTrackerGroup.add(goldenCoin2);
+// const goldenCoin2 = new THREE.Mesh(coinGeometry, goldenMaterial2);
+// // goldenCoin2.position.z = -3;
+// // goldenCoin2.position.y = 2;
+// goldenCoin2.visible = false;
+// instantTrackerGroup.add(goldenCoin2);
 
 // Create a thin strip
-const stripGeometry = new THREE.PlaneGeometry(20, 3.5);
+const stripGeometry = new THREE.PlaneGeometry(100, 3.5);
 const stripMaterial = new THREE.MeshBasicMaterial({
   color: 0x5190cf,
   transparent: true,
@@ -157,7 +176,7 @@ const arrowMaterial = new THREE.MeshBasicMaterial({
   opacity: 0.2,
 });
 const arrows: any = [];
-const arrowCount = 10;
+const arrowCount = 100;
 const gap = 3; // Gap between arrows
 for (let i = 0; i < arrowCount; i++) {
   const arrow = new THREE.Mesh(arrowGeometry, arrowMaterial);
@@ -199,9 +218,9 @@ function render(totalDist: number): void {
       coinModel.rotation.y += 0.01;
     }
     arrows.forEach((arrow: any) => {
-      arrow.position.x += 0.05; // Move arrows horizontally
+      arrow.position.x += 0.009; // Move arrows horizontally
       // Check if arrow has moved beyond a threshold
-      if (arrow.position.x > (arrowCount / 2) * gap) {
+      if (arrow.position.x > (arrowCount / 2) * gap * 10) {
         arrow.position.x = -(arrowCount / 2) * gap; // Reset arrow position to the starting point
       }
     });
@@ -211,9 +230,9 @@ function render(totalDist: number): void {
       coinModel.rotation.y += 0.01;
     }
     arrows.forEach((arrow: any) => {
-      arrow.position.x += 0.05; // Move arrows horizontally
+      arrow.position.x += 0.009; // Move arrows horizontally
       // Check if arrow has moved beyond a threshold
-      if (arrow.position.x > (arrowCount / 2) * gap) {
+      if (arrow.position.x > (arrowCount / 2) * gap * 10) {
         arrow.position.x = -(arrowCount / 2) * gap; // Reset arrow position to the starting point
       }
     });
