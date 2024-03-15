@@ -6,6 +6,11 @@ window.addEventListener("load", function () {
     container.style.display = "block";
   }, 1000); // Delay of 1 second (1000 milliseconds)
 });
+
+function redirectToIndex() {
+  window.location.href = "index.html";
+}
+
 // Call the function to start the animation
 
 animateItemValues();

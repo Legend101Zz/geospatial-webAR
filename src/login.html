@@ -4,30 +4,30 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Create Account</title>
-    <link rel="stylesheet" href="styles.css" />
+    <link rel="stylesheet" href="./login/styles.css" />
   </head>
   <body>
     <div class="container">
       <div class="logo">
-        <img src="../../assets/asics.png" alt="Asics Logo" />
+        <img src="../assets/asics.png" alt="Asics Logo" />
       </div>
 
       <h3 class="bold-text">Create an Account</h3>
-      <form>
+      <form id="registrationForm">
         <div class="input-field">
-          <img src="../../assets/Profile.png" alt="Icon" class="icon-image" />
+          <img src="../assets/Profile.png" alt="Icon" class="icon-image" />
           <input type="text" placeholder="Vidin" required />
         </div>
         <div class="input-field">
-          <img src="../../assets/Profile.png" alt="Icon" class="icon-image" />
+          <img src="../assets/Profile.png" alt="Icon" class="icon-image" />
           <input type="text" placeholder="Choudhari" required />
         </div>
         <div class="input-field">
-          <img src="../../assets/Message.png" alt="Icon" class="icon-image" />
+          <img src="../assets/Message.png" alt="Icon" class="icon-image" />
           <input type="email" placeholder="vidindc@gmail.com" required />
         </div>
         <div class="input-field">
-          <img src="../../assets/Lock.png" alt="Icon" class="icon-image" />
+          <img src="../assets/Lock.png" alt="Icon" class="icon-image" />
           <input type="password" placeholder="Password" required />
         </div>
         <div class="checkbox">
@@ -42,10 +42,20 @@
       </form>
       <p>Or Register using Social Media</p>
       <div class="social-icons">
-        <a href="#"><img src="../../assets/google.png" alt="Google" /></a>
-        <a href="#"><img src="../../assets/facebook.png" alt="Facebook" /></a>
+        <a href="#"><img src="../assets/google.png" alt="Google" /></a>
+        <a href="#"><img src="../assets/facebook.png" alt="Facebook" /></a>
       </div>
       <p class="login-link">Already have an account? <a href="#">Login</a></p>
     </div>
+    <script>
+      document
+        .getElementById("registrationForm")
+        .addEventListener("submit", function (event) {
+          event.preventDefault(); // Prevent form submission
+
+          // Redirect to home.html
+          window.location.href = "./home.html";
+        });
+    </script>
   </body>
 </html>

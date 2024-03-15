@@ -4,7 +4,7 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>AR Runner</title>
-    <link rel="stylesheet" href="styles.css" />
+    <link rel="stylesheet" href="./home/styles.css" />
   </head>
   <body>
     <div class="ar-runnerr">
@@ -25,7 +25,7 @@
         <!-- Main Content -->
         <div class="content">
           <div class="banner">
-            <img src="../../assets/banner.png" alt="Banner" />
+            <img src="../assets/banner.png" alt="Banner" />
             <!-- <div class="points-info">
             <div class="points">418,823 Points</div>
             <div class="points-today">+12,240 today &rarr;</div>
@@ -117,7 +117,7 @@
               <div class="summary-items">
                 <div class="item">
                   <div class="item-info">
-                    <img src="../../assets/steps.png" alt="Steps" />
+                    <img src="../assets/steps.png" alt="Steps" />
                     <div class="items">
                       <div class="item-value">1901</div>
                       <div class="item-label">Step Today</div>
@@ -126,7 +126,7 @@
                 </div>
                 <div class="item">
                   <div class="item-info">
-                    <img src="../../assets/la_burn.png" alt="Calories" />
+                    <img src="../assets/la_burn.png" alt="Calories" />
                     <div class="items">
                       <div class="item-value">1021</div>
                       <div class="item-label">Cal Burned</div>
@@ -135,7 +135,7 @@
                 </div>
                 <div class="item">
                   <div class="item-info">
-                    <img src="../../assets/distance.png" alt="Distance" />
+                    <img src="../assets/distance.png" alt="Distance" />
                     <div class="items">
                       <div class="item-value">8.5</div>
                       <div class="item-label">Km Distance</div>
@@ -169,13 +169,13 @@
             <div class="modal-content">
               <span class="close-btn">&times;</span>
               <div class="modal-image-container">
-                <img src="../../assets/runner.png" alt="Modal Image 1" />
+                <img src="../assets/runner.png" alt="Modal Image 1" />
               </div>
               <div class="modal-options">
-                <button class="modal-option">
+                <button class="modal-option" onclick="redirectToIndex()">
                   Yes, choose a running track for me!
                 </button>
-                <button class="modal-option">
+                <button class="modal-option" onclick="redirectToIndex()">
                   No, I will choose my own track
                 </button>
               </div>
@@ -184,11 +184,11 @@
         </div>
         <div class="nav-buttons">
           <a href="#" class="nav-button">
-            <img src="../../assets/home.png" alt="Home" />
+            <img src="../assets/home.png" alt="Home" />
             <span>Home</span>
           </a>
           <a href="#" class="nav-button">
-            <img src="../../assets/time.png" alt="Activity" />
+            <img src="../assets/time.png" alt="Activity" />
             <span>Activity</span>
           </a>
           <div class="ar-run-button">
@@ -208,16 +208,16 @@
             <span>AR Run</span>
           </div>
           <a href="#" class="nav-button">
-            <img src="../../assets/shop.png" alt="AR Store" />
+            <img src="../assets/shop.png" alt="AR Store" />
             <span>AR Store</span>
           </a>
           <a href="#" class="nav-button">
-            <img src="../../assets/profile2.png" alt="Profile" />
+            <img src="../assets/profile2.png" alt="Profile" />
             <span>Profile</span>
           </a>
         </div>
       </div>
     </div>
-    <script src="script.js"></script>
+    <script src="./home/script.js"></script>
   </body>
 </html>

@@ -25,11 +25,11 @@ function togglePasswordVisibility() {
   }
 }
 
-const signupForm = document.getElementById("signupForm");
+document
+  .getElementById("registrationForm")
+  .addEventListener("submit", function (event) {
+    event.preventDefault(); // Prevent form submission
 
-signupForm.addEventListener("submit", (event) => {
-  event.preventDefault();
-  // Add your form submission logic here
-  // You can access form fields using signupForm.elements
-  // For example: signupForm.elements['firstName'].value
-});
+    // Redirect to home.html
+    window.location.href = "./home.html";
+  });
