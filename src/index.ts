@@ -25,6 +25,30 @@ let keyModel: THREE.Group;
 const pointElement =
   document.getElementById("points") || document.createElement("div");
 
+function showModal() {
+  var modal = document.getElementById("myModal");
+  if (modal) modal.style.display = "block";
+}
+
+function closeModal() {
+  var modal = document.getElementById("myModal");
+  if (modal) modal.style.display = "none";
+}
+
+const popupImage =
+  document.getElementById("popupImage") || document.createElement("div");
+
+const modalM =
+  document.getElementById("closeM") || document.createElement("div");
+
+modalM.addEventListener("click", () => {
+  closeModal();
+});
+
+popupImage.addEventListener("click", () => {
+  showModal();
+});
+
 const manager = new ZapparThree.LoadingManager();
 const renderer = new THREE.WebGLRenderer({ antialias: true });
 const scene = new THREE.Scene();
@@ -44,17 +68,17 @@ function calculateDistanceFromOrigin(): number {
   return userPosition.length();
 }
 
-function checkUserARposeDist(): boolean {
-  const distanceThresholdCoin2 = 2;
-  const userPosition = new THREE.Vector3();
-  camera.getWorldPosition(userPosition);
-  const distanceToCoin2 = userPosition.distanceTo(goldenCoin2.position);
+// function checkUserARposeDist(): boolean {
+//   const distanceThresholdCoin2 = 2;
+//   const userPosition = new THREE.Vector3();
+//   camera.getWorldPosition(userPosition);
+//   const distanceToCoin2 = userPosition.distanceTo(goldenCoin2.position);
 
-  if (distanceToCoin2 < distanceThresholdCoin2) return true;
+//   if (distanceToCoin2 < distanceThresholdCoin2) return true;
 
-  console.log("distanceToCoin2", distanceToCoin2);
-  return false;
-}
+//   console.log("distanceToCoin2", distanceToCoin2);
+//   return false;
+// }
 
 ZapparThree.permissionRequestUI().then((granted) => {
   if (granted) camera.start();
@@ -210,6 +234,7 @@ placeButton.addEventListener("click", () => {
   hasPlaced = true;
   startModal.remove();
   placeButton.remove();
+  popupImage.style.display = "block";
 });
 
 function render(totalDist: number): void {
@@ -219,7 +244,7 @@ function render(totalDist: number): void {
       coinModel.rotation.y += 0.01;
     }
     arrows.forEach((arrow: any) => {
-      arrow.position.x += 0.009; // Move arrows horizontally
+      arrow.position.x += 0.03; // Move arrows horizontally
       // Check if arrow has moved beyond a threshold
       if (arrow.position.x > (arrowCount / 2) * gap * 10) {
         arrow.position.x = -(arrowCount / 2) * gap; // Reset arrow position to the starting point
@@ -232,7 +257,7 @@ function render(totalDist: number): void {
       keyModel.rotation.y += 0.01;
     }
     arrows.forEach((arrow: any) => {
-      arrow.position.x += 0.009; // Move arrows horizontally
+      arrow.position.x += 0.03; // Move arrows horizontally
       // Check if arrow has moved beyond a threshold
       if (arrow.position.x > (arrowCount / 2) * gap * 10) {
         arrow.position.x = -(arrowCount / 2) * gap; // Reset arrow position to the starting point
@@ -247,7 +272,21 @@ function render(totalDist: number): void {
       coinModel.visible = false;
       keyModel.visible = true;
       totalpoints += 1;
-      pointElement.textContent = `Points : ${totalpoints} `;
+      // Create the temporary element with the text
+      const messageElement = document.createElement("div");
+      messageElement.textContent = "You have obtained a Golden shoe";
+      messageElement.style.position = "fixed";
+      messageElement.style.top = "50%";
+      messageElement.style.left = "50%";
+      messageElement.style.transform = "translate(-50%, -50%)";
+      messageElement.style.fontSize = "24px";
+      messageElement.style.color = "white";
+      document.body.appendChild(messageElement);
+
+      // Remove the temporary element after 2-3 seconds
+      setTimeout(() => {
+        messageElement.remove();
+      }, 3000); // 3000 milliseconds = 3 seconds
     }
 
     // goldenCoin.position.z = -totalDist - 5;
