@@ -76,6 +76,7 @@ gltfLoader.load(
   model,
   (gltf) => {
     coinModel = gltf.scene;
+    coinModel.scale.set(0.5, 0.5, 0.5);
     instantTrackerGroup.add(gltf.scene);
   },
   undefined,
@@ -121,21 +122,48 @@ goldenCoin2.visible = false;
 instantTrackerGroup.add(goldenCoin2);
 
 // Create a thin strip
-const stripGeometry = new THREE.PlaneGeometry(10, 1);
-const stripMaterial = new THREE.MeshBasicMaterial({ color: 0x00ff00 });
+const stripGeometry = new THREE.PlaneGeometry(20, 3.5);
+const stripMaterial = new THREE.MeshBasicMaterial({
+  color: 0x5190cf,
+  transparent: true,
+  opacity: 0.6,
+});
 const strip = new THREE.Mesh(stripGeometry, stripMaterial);
-// strip.position.set(0, -window.innerHeight / 2 + 20, 0); // Position the strip at the bottom of the screen
+
+strip.rotation.x = -Math.PI / 2;
+strip.rotation.z = Math.PI / 2;
+strip.position.set(0, -3, 0); // Position the strip at the bottom of the screen
 instantTrackerGroup.add(strip);
 
-// Create small arrows
-const arrowGeometry = new THREE.ConeGeometry(0.2, 0.5, 8);
-const arrowMaterial = new THREE.MeshBasicMaterial({ color: 0xffffff });
+// Create the triangle arrow geometry
+const arrowShape = new THREE.Shape();
+arrowShape.moveTo(0, 0);
+arrowShape.lineTo(-1, 2); // Tip of the arrow
+arrowShape.lineTo(-0.5, 2); // Upper edge of the arrow
+arrowShape.lineTo(-0.5, 4); // Upper point of the tail
+arrowShape.lineTo(0.5, 4); // Lower point of the tail
+arrowShape.lineTo(0.5, 2); // Lower edge of the arrow
+arrowShape.lineTo(1, 2); // Tip of the arrow
+arrowShape.lineTo(0, 0); // Back to starting point
+
+const arrowGeometry = new THREE.ExtrudeGeometry(arrowShape, {
+  depth: 0.4, // Adjust depth as needed
+  bevelEnabled: false, // Disable beveling
+});
+
+const arrowMaterial = new THREE.MeshBasicMaterial({
+  color: 0xffffff,
+  transparent: true,
+  opacity: 0.2,
+});
 const arrows: any = [];
 const arrowCount = 10;
-const gap = 1; // Gap between arrows
+const gap = 3; // Gap between arrows
 for (let i = 0; i < arrowCount; i++) {
   const arrow = new THREE.Mesh(arrowGeometry, arrowMaterial);
-  arrow.position.set(i * gap - (arrowCount / 2) * gap, 0, 0); // Position arrows horizontally
+  arrow.scale.set(0.5, 0.5, 0.5);
+  arrow.rotation.z = Math.PI / 2;
+  arrow.position.set(i * gap - (arrowCount / 2) * gap, 0.001, 0); // Position arrows horizontally
   strip.add(arrow); // Add arrows to the strip
   arrows.push(arrow);
 }
@@ -154,8 +182,13 @@ instantTrackerGroup.add(ambientLight);
 let hasPlaced = false;
 const placeButton =
   document.getElementById("tap-to-place") || document.createElement("div");
+
+const startModal =
+  document.querySelector(".task-button") || document.createElement("div");
+
 placeButton.addEventListener("click", () => {
   hasPlaced = true;
+  startModal.remove();
   placeButton.remove();
 });
 
@@ -166,10 +199,24 @@ function render(totalDist: number): void {
       coinModel.rotation.y += 0.01;
     }
     arrows.forEach((arrow: any) => {
-      arrow.rotation.z += 0.1;
+      arrow.position.x += 0.05; // Move arrows horizontally
+      // Check if arrow has moved beyond a threshold
+      if (arrow.position.x > (arrowCount / 2) * gap) {
+        arrow.position.x = -(arrowCount / 2) * gap; // Reset arrow position to the starting point
+      }
     });
     camera.updateFrame(renderer);
   } else {
+    if (coinModel) {
+      coinModel.rotation.y += 0.01;
+    }
+    arrows.forEach((arrow: any) => {
+      arrow.position.x += 0.05; // Move arrows horizontally
+      // Check if arrow has moved beyond a threshold
+      if (arrow.position.x > (arrowCount / 2) * gap) {
+        arrow.position.x = -(arrowCount / 2) * gap; // Reset arrow position to the starting point
+      }
+    });
     totalDist = totalDist / 10000;
     camera.updateFrame(renderer);
     goldenCoin.position.z += -0.01;
