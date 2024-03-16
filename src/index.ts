@@ -6,7 +6,6 @@ import {
   Coordinates,
   calculateDistance,
 } from "./location-tracking";
-import { initializeMap } from "./mapbox";
 const model = new URL("../assets/goldencoin.glb", import.meta.url).href;
 const model2 = new URL("../assets/keyd.glb", import.meta.url).href;
 const coin = new URL("../assets/coin.png", import.meta.url).href;

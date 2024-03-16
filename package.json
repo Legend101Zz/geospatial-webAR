@@ -2,7 +2,7 @@
   "name": "zappar-threejs-example",
   "version": "0.0.0",
   "description": "Example using Zappar's ThreeJS wrapper",
-  "source": "src/index.html",
+  "source": "src/run.html",
   "scripts": {
     "start": "parcel --https",
     "build": "parcel build --public-url='./'"

@@ -22,7 +22,7 @@ export function initializeMap() {
   return {
     map,
     getMarker: () => marker,
-    flyTo: (lngLat: any, zoom: any) => {
+    flyTo: (lngLat, zoom) => {
       console.log("running fly too fn ");
       map.flyTo({ center: lngLat, zoom });
     },
