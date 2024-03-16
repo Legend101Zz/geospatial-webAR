@@ -84,6 +84,8 @@ gltfLoader.load(
   (gltf) => {
     coinModel = gltf.scene;
     coinModel.scale.set(0.5, 0.5, 0.5);
+    coinModel.rotation.y = Math.PI / 2;
+    coinModel.rotation.z = Math.PI;
     coinModel.position.z = -1;
     coinModel.position.y = 1;
     instantTrackerGroup.add(gltf.scene);
@@ -217,10 +219,11 @@ function render(totalDist: number): void {
   } else {
     if (coinModel && keyModel) {
       coinModel.rotation.y += 0.01;
+      keyModel.position.z += -0.01;
       keyModel.rotation.z += 0.01;
       totalDist = totalDist / 10000;
       camera.updateFrame(renderer);
-      keyModel.position.z += -0.01;
+
       coinModel.scale.add(new THREE.Vector3(0.0002, 0.0002, 0.0002));
       console.log("Distance of the user from the origin:", totalDist);
       if (totalDist > 1.6 && coinModel.visible) {
