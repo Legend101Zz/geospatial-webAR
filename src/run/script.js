@@ -2,6 +2,15 @@ import { initializeMap } from "../mapbox";
 import { getUserLocation } from "../location-tracking";
 
 const expandBtn = document.querySelector(".expand-btn");
+
+// Get the "Start Running" button element
+const startRunningBtn = document.querySelector(".start-running-btn");
+
+// Add a click event listener to the button
+startRunningBtn.addEventListener("click", () => {
+  // Redirect to index.html
+  window.location.href = "index.html";
+});
 const cardContent = document.querySelector(".card-content");
 expandBtn.addEventListener("click", () => {
   cardContent.classList.toggle("expanded");
@@ -31,8 +40,6 @@ window.addEventListener("load", function () {
 function redirectToIndex() {
   window.location.href = "index.html";
 }
-
-
 
 // Call the function to start the animation
 

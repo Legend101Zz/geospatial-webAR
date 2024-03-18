@@ -29,6 +29,9 @@ nav {
   align-items: center;
   padding: 10px 15px;
   background-color: #f2f2f2;
+  position: sticky;
+  top: 0;
+  z-index: 1;
 }
 
 .nav-left,
@@ -154,7 +157,12 @@ nav {
   backdrop-filter: blur(10px);
   padding: 16px;
   display: flex;
-  justify-content: flex-end;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.footer-actions {
+  display: flex;
 }
 
 .action-btn {
@@ -169,6 +177,20 @@ nav {
 
 .action-btn:hover {
   color: #d63031;
+}
+
+.start-running-btn {
+  background-color: #ec4635;
+  color: #fff;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s ease-in-out;
+}
+
+.start-running-btn:hover {
+  background-color: #d63031;
 }
 
 /* AR Run Button Styles */

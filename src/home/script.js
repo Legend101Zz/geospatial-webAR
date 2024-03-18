@@ -8,7 +8,7 @@ window.addEventListener("load", function () {
 });
 
 function redirectToIndex() {
-  window.location.href = "index.html";
+  window.location.href = "run.html";
 }
 
 // Call the function to start the animation
