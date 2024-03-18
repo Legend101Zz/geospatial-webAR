@@ -544,8 +544,10 @@ if (_zapparThreejs.browserIncompatible()) {
     _zapparThreejs.browserIncompatibleUI();
     throw new Error("Unsupported browser");
 }
+let callRender = false;
 let totalDistance = 0;
 let totalpoints = 0;
+let checkDist = 0;
 let coinModel;
 let keyModel;
 // Get the HTML element to display points
@@ -686,6 +688,7 @@ placeButton.addEventListener("click", ()=>{
     popupImage.style.display = "block";
 });
 function render(totalDist) {
+    // console.log("totalDist val", totalDist);
     if (!hasPlaced) {
         instantTrackerGroup.setAnchorPoseFromCameraOffset(0, 0, -15);
         if (coinModel) coinModel.rotation.y += 0.01;
@@ -701,13 +704,12 @@ function render(totalDist) {
         coinModel.rotation.y += 0.01;
         keyModel.position.z += -0.01;
         keyModel.rotation.z += 0.01;
-        totalDist = totalDist / 10000;
+        // totalDist = totalDist / 10000;
         camera.updateFrame(renderer);
         coinModel.scale.add(new _three.Vector3(0.0002, 0.0002, 0.0002));
-        console.log("Distance of the user from the origin:", totalDist);
-        if (totalDist > 1.6 && coinModel.visible) {
+        console.log("Distance of the user from the origin:", checkDist);
+        if (checkDist > 0.7 && coinModel.visible) {
             coinModel.visible = false;
-            keyModel.visible = true;
             totalpoints += 1;
             // Create the temporary element with the text
             const messageElement = document.createElement("div");
@@ -722,6 +724,7 @@ function render(totalDist) {
             // Remove the temporary element after 2-3 seconds
             setTimeout(()=>{
                 messageElement.remove();
+                keyModel.visible = true;
             }, 3000); // 3000 milliseconds = 3 seconds
         }
     }
@@ -731,6 +734,7 @@ function render(totalDist) {
     // console.log("Distance of the user from the origin:", distanceFromOrigin);
     // if (checkUserARposeDist()) {
     // }
+    checkDist += 0.001;
     requestAnimationFrame(render);
 }
 // Get the map and marker from initializeMap function
@@ -760,7 +764,10 @@ const distanceElement = document.getElementById("distance") || document.createEl
     // // // map.flyTo(markerLngLat, 15);
     lastKnownCoords = coords;
     console.log("totalDistance", totalDistance);
-    render(totalDistance);
+    if (!callRender) {
+        render(0);
+        callRender = true;
+    }
 }, (error)=>{
     console.error("Error getting user location:", error.message);
 });
