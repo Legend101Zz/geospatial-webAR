@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Create Account</title>
+    <link rel="stylesheet" href="/login.d41864b9.css">
+  </head>
+  <body>
+    <div class="container">
+      <div class="logo">
+        <img src="/asics.67fb6f4a.png" alt="Asics Logo">
+      </div>
+
+      <h3 class="bold-text">Create an Account</h3>
+      <form id="registrationForm">
+        <div class="input-field">
+          <img src="/Profile.8561c526.png" alt="Icon" class="icon-image">
+          <input type="text" placeholder="Vidin" required="">
+        </div>
+        <div class="input-field">
+          <img src="/Profile.8561c526.png" alt="Icon" class="icon-image">
+          <input type="text" placeholder="Choudhari" required="">
+        </div>
+        <div class="input-field">
+          <img src="/Message.817a545d.png" alt="Icon" class="icon-image">
+          <input type="email" placeholder="vidindc@gmail.com" required="">
+        </div>
+        <div class="input-field">
+          <img src="/Lock.5629e9ac.png" alt="Icon" class="icon-image">
+          <input type="password" placeholder="Password" required="">
+        </div>
+        <div class="checkbox">
+          <input type="checkbox" id="terms" required="">
+          <label for="terms" class="terms-label">By continuing you accept our <a href="#">Privacy Policy</a> and
+            <a href="#">Term of Use</a></label>
+        </div>
+        <br>
+        <button type="submit" class="register-btn">Register</button>
+      </form>
+      <p>Or Register using Social Media</p>
+      <div class="social-icons">
+        <a href="#"><img src="/google.8f7adc19.png" alt="Google"></a>
+        <a href="#"><img src="/facebook.444fd54e.png" alt="Facebook"></a>
+      </div>
+      <p class="login-link">Already have an account? <a href="#">Login</a></p>
+    </div>
+    <script>document.getElementById("registrationForm").addEventListener("submit", function(event) {
+    event.preventDefault(); // Prevent form submission
+    // Redirect to home.html
+    window.location.href = "./home.html";
+});
+
+</script>
+  <script src="/login.355e69e6.js"></script></body>
+</html>
