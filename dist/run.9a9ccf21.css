@@ -33,6 +33,7 @@ nav {
 
 .nav-left, .nav-right {
   align-items: center;
+  margin-bottom: -7px;
   display: flex;
 }
 
@@ -42,6 +43,7 @@ nav {
 }
 
 .nav-center {
+  color: #ec4635;
   font-weight: bold;
 }
 
@@ -233,8 +235,8 @@ nav {
 }
 
 .nav-button img {
-  width: 20px;
-  height: 20px;
+  width: 32px;
+  height: 32px;
   margin-bottom: 5px;
 }
 

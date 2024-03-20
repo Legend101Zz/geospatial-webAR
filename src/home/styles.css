@@ -181,6 +181,7 @@ summary h3 {
   align-items: center;
   flex-direction: column;
   margin-top: 10px;
+  margin-right: 70px;
 }
 
 .item {

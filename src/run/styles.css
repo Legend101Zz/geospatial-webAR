@@ -38,6 +38,7 @@ nav {
 .nav-right {
   display: flex;
   align-items: center;
+  margin-bottom: -7px;
 }
 
 .nav-icon {
@@ -47,6 +48,7 @@ nav {
 
 .nav-center {
   font-weight: bold;
+  color: #ec4635;
 }
 
 /* Main Content Styles */
@@ -238,8 +240,8 @@ nav {
 }
 
 .nav-button img {
-  width: 20px;
-  height: 20px;
+  width: 32px;
+  height: 32px;
   margin-bottom: 5px;
 }
 
