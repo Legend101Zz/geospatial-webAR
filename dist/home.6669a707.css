@@ -52,6 +52,7 @@ nav {
 }
 
 .nav-center {
+  color: #ec4635;
   font-weight: bold;
 }
 
@@ -189,8 +190,8 @@ summary h3 {
 }
 
 .item img {
-  width: 30px;
-  height: 30px;
+  width: 34px;
+  height: 34px;
   margin-right: 10px;
 }
 
@@ -302,7 +303,7 @@ summary h3 {
 .nav-buttons {
   z-index: 1000;
   z-index: 999;
-  background-color: #a7a6a6;
+  background-color: #e1e1e1;
   border-radius: 20px;
   justify-content: space-around;
   align-items: center;
@@ -324,8 +325,8 @@ summary h3 {
 }
 
 .nav-button img {
-  width: 20px;
-  height: 20px;
+  width: 24px;
+  height: 24px;
   margin-bottom: 5px;
 }
 
