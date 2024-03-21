@@ -27,9 +27,11 @@ const closeBtn = document.getElementsByClassName("close-btn")[0];
 // Get the AR Run SVG element
 const arRunSvg = document.getElementById("ar-run-svg");
 
+const overlay = document.getElementById("overlay");
+
 // When the user clicks the AR Run button, open the modal
 arRunButton.onclick = function () {
-  modal.style.display = "block";
+  // modal.style.display = "block";
   animateArRunButton();
 };
 
@@ -49,7 +51,22 @@ window.onclick = function (event) {
 
 // Animation for the AR Run button
 function animateArRunButton() {
-  arRunSvg.style.animation = "jump 0.5s infinite";
+  setTimeout(function () {
+    window.location.href = "index.html";
+  }, 1500);
+  // Get the SVG image element
+  const arRunSvg = document.getElementById("ar-run-svg");
+
+  // Add animation to the SVG image
+  arRunSvg.style.animation = "person-walking 1s forwards";
+
+  // Get the AR text element
+  const arText = document.querySelector(".ar-run-button span");
+
+  // Add animation to the AR text
+  arText.style.animation = "ar-text-animation 0.5s forwards";
+
+  // overlay.style.display = "block";
 }
 
 // Stop the AR Run button animation

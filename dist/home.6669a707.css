@@ -407,6 +407,39 @@ summary h3 {
   margin-bottom: 0;
 }
 
+#overlay {
+  width: 100%;
+  height: 100%;
+  z-index: 1000;
+  background-color: #00000080;
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+}
+
+@keyframes person-walking {
+  0% {
+    transform: translateX(0);
+  }
+
+  100% {
+    transform: translateX(100%);
+  }
+}
+
+@keyframes ar-text-animation {
+  0% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  100% {
+    opacity: 0;
+    transform: translateY(-20px);
+  }
+}
+
 @keyframes slide-down {
   0% {
     transform: translateY(-100%);
