@@ -407,6 +407,15 @@ summary h3 {
   margin-bottom: 0;
 }
 
+#man {
+  transition: transform .5s, opacity .5s;
+}
+
+#man.pop-out {
+  opacity: 1;
+  transform: translate(0);
+}
+
 #overlay {
   width: 100%;
   height: 100%;

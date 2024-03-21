@@ -29,6 +29,8 @@ const arRunSvg = document.getElementById("ar-run-svg");
 
 const overlay = document.getElementById("overlay");
 
+const manSvg = document.getElementById("man");
+
 // When the user clicks the AR Run button, open the modal
 arRunButton.onclick = function () {
   // modal.style.display = "block";
@@ -51,20 +53,37 @@ window.onclick = function (event) {
 
 // Animation for the AR Run button
 function animateArRunButton() {
+  // setTimeout(function () {
+  //   window.location.href = "index.html";
+  // }, 1500);
+
+  // Apply initial style to position the man SVG outside the AR button
+  manSvg.style.transform = "translate(-50%, -50%) scale(0)";
+
+  // Trigger a reflow before applying the transition to ensure initial style is applied
+  void manSvg.offsetWidth;
+
+  // Apply transition to animate the man SVG into position
+  manSvg.style.transition = "transform 0.5s ease-in-out";
+  manSvg.style.transform = "translate(-40%, -20%) scale(1)";
+
+  setTimeout(() => {
+    // Get the SVG image element for the man walking
+    const arRunSvg = document.getElementById("ar-run-svg");
+
+    // Add animation to the SVG image for the man walking
+    arRunSvg.style.animation = "person-walking 1s forwards";
+
+    // Get the AR text element
+    const arText = document.querySelector(".ar-run-button span");
+
+    // Add animation to the AR text
+    arText.style.animation = "ar-text-animation 0.5s forwards";
+  }, 500);
+
   setTimeout(function () {
     window.location.href = "index.html";
   }, 1500);
-  // Get the SVG image element
-  const arRunSvg = document.getElementById("ar-run-svg");
-
-  // Add animation to the SVG image
-  arRunSvg.style.animation = "person-walking 1s forwards";
-
-  // Get the AR text element
-  const arText = document.querySelector(".ar-run-button span");
-
-  // Add animation to the AR text
-  arText.style.animation = "ar-text-animation 0.5s forwards";
 
   // overlay.style.display = "block";
 }
