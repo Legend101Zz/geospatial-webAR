@@ -538,7 +538,7 @@ var _gltfloader = require("three/examples/jsm/loaders/GLTFLoader");
 var _locationTracking = require("./location-tracking");
 var _indexCss = require("./index.css");
 const model = new URL(require("2edf66f74b2f0147")).href;
-const model2 = new URL(require("ff6a5eadeed76c7b")).href;
+// const model2 = new URL("../assets/keyd.glb", import.meta.url).href;
 const coin = new URL(require("95506871147493e5")).href;
 if (_zapparThreejs.browserIncompatible()) {
     _zapparThreejs.browserIncompatibleUI();
@@ -549,7 +549,7 @@ let totalDistance = 0;
 let totalpoints = 0;
 let checkDist = 0;
 let coinModel;
-let keyModel;
+// let keyModel: THREE.Group;
 // Get the HTML element to display points
 const pointElement = document.getElementById("points") || document.createElement("div");
 function showModal() {
@@ -600,29 +600,34 @@ gltfLoader.load(model, (gltf)=>{
 }, undefined, ()=>{
     console.log("An error ocurred loading the GLTF model");
 });
-gltfLoader.load(model2, (gltf)=>{
-    console.log("loading keyModel", gltf);
-    keyModel = gltf.scene;
-    keyModel.rotation.x = Math.PI / 2;
-    keyModel.position.z = -1;
-    keyModel.position.y = 1;
-    keyModel.visible = false;
-    gltf.scene.traverse(function(child) {
-        // Check if the child is a mesh
-        if (child instanceof _three.Mesh) {
-            // Add lights to the mesh material
-            const customMaterial = new _three.MeshStandardMaterial({
-                map: child.material.map,
-                emissiveIntensity: 0.2,
-                emissive: new _three.Color(0xffffff)
-            });
-            child.material = customMaterial;
-        }
-    });
-    instantTrackerGroup.add(gltf.scene);
-}, undefined, ()=>{
-    console.log("An error ocurred loading the GLTF model");
-});
+// gltfLoader.load(
+//   model2,
+//   (gltf) => {
+//     console.log("loading keyModel", gltf);
+//     keyModel = gltf.scene;
+//     keyModel.rotation.x = Math.PI / 2;
+//     keyModel.position.z = -1;
+//     keyModel.position.y = 1;
+//     keyModel.visible = false;
+//     gltf.scene.traverse(function (child) {
+//       // Check if the child is a mesh
+//       if (child instanceof THREE.Mesh) {
+//         // Add lights to the mesh material
+//         const customMaterial = new THREE.MeshStandardMaterial({
+//           map: child.material.map, // Use the default texture map
+//           emissiveIntensity: 0.2, // Adjust emissive intensity as needed
+//           emissive: new THREE.Color(0xffffff), // Set emissive color
+//         });
+//         child.material = customMaterial;
+//       }
+//     });
+//     instantTrackerGroup.add(gltf.scene);
+//   },
+//   undefined,
+//   () => {
+//     console.log("An error ocurred loading the GLTF model");
+//   }
+// );
 // ========= FLOOR3D =========
 // Create a thin strip
 // const stripGeometry = new THREE.PlaneGeometry(100, 3.5);
@@ -700,31 +705,48 @@ function render(totalDist) {
         //   }
         // });
         camera.updateFrame(renderer);
-    } else if (coinModel && keyModel) {
+    } else if (coinModel) {
         coinModel.rotation.y += 0.01;
-        keyModel.position.z += -0.01;
-        keyModel.rotation.z += 0.01;
+        // keyModel.position.z += -0.025;
+        // keyModel.rotation.z += 0.01;
         // totalDist = totalDist / 10000;
         camera.updateFrame(renderer);
         coinModel.scale.add(new _three.Vector3(0.0002, 0.0002, 0.0002));
         console.log("Distance of the user from the origin:", checkDist);
-        if (checkDist > 0.7 && coinModel.visible) {
+        if (checkDist > 1.85 && coinModel.visible) {
             coinModel.visible = false;
             totalpoints += 1;
-            // Create the temporary element with the text
+            // Create translucent background div
+            const bgElement = document.createElement("div");
+            bgElement.classList.add("popup-bg");
+            bgElement.style.position = "fixed";
+            bgElement.style.top = "50%";
+            bgElement.style.left = "50%";
+            bgElement.style.transform = "translate(-50%, -50%)";
+            bgElement.style.backgroundColor = "rgba(0, 0, 0, 0.5)"; // Adjust the alpha value for the desired transparency
+            bgElement.style.padding = "20px"; // Add padding for the text
+            bgElement.style.borderRadius = "10px"; // Add rounded corners
+            document.body.appendChild(bgElement);
+            // Create message div
             const messageElement = document.createElement("div");
-            messageElement.textContent = "You have obtained a Golden shoe";
-            messageElement.style.position = "fixed";
-            messageElement.style.top = "50%";
-            messageElement.style.left = "50%";
-            messageElement.style.transform = "translate(-50%, -50%)";
-            messageElement.style.fontSize = "24px";
+            messageElement.classList.add("popup");
+            messageElement.textContent = "Collect 4 more coins to get a ";
+            const goldenKeySpan = document.createElement("span");
+            goldenKeySpan.textContent = "Golden Key";
+            goldenKeySpan.style.color = "gold"; // Set the color to gold
+            messageElement.appendChild(goldenKeySpan);
+            messageElement.style.fontSize = "16px";
             messageElement.style.color = "white";
-            document.body.appendChild(messageElement);
+            messageElement.style.textAlign = "center"; // Center text
+            messageElement.style.whiteSpace = "nowrap"; // Prevent text wrapping
+            messageElement.style.overflow = "hidden"; // Hide overflow text
+            messageElement.style.textOverflow = "ellipsis"; // Show ellipsis for overflow text
+            bgElement.appendChild(messageElement); // Append to the background div
             // Remove the temporary element after 2-3 seconds
             setTimeout(()=>{
                 messageElement.remove();
-                keyModel.visible = true;
+                bgElement.remove();
+            // keyModel.visible = true;
             }, 3000); // 3000 milliseconds = 3 seconds
         }
     }
@@ -772,7 +794,7 @@ const distanceElement = document.getElementById("distance") || document.createEl
     console.error("Error getting user location:", error.message);
 });
 
-},{"three":"ktPTu","@zappar/zappar-threejs":"a5Rpw","three/examples/jsm/loaders/GLTFLoader":"dVRsF","./location-tracking":"1dTEd","./index.css":"irmnC","2edf66f74b2f0147":"fygwa","ff6a5eadeed76c7b":"fiAJl","95506871147493e5":"gWaPM"}],"ktPTu":[function(require,module,exports) {
+},{"three":"ktPTu","@zappar/zappar-threejs":"a5Rpw","three/examples/jsm/loaders/GLTFLoader":"dVRsF","./location-tracking":"1dTEd","./index.css":"irmnC","2edf66f74b2f0147":"fygwa","95506871147493e5":"gWaPM"}],"ktPTu":[function(require,module,exports) {
 var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 parcelHelpers.defineInteropFlag(exports);
 parcelHelpers.export(exports, "ACESFilmicToneMapping", ()=>ACESFilmicToneMapping);
@@ -54542,9 +54564,6 @@ function toRadians(degrees) {
 
 },{"@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"irmnC":[function() {},{}],"fygwa":[function(require,module,exports) {
 module.exports = require("./helpers/bundle-url").getBundleURL("7UhFu") + "goldencoin.5f115949.glb" + "?" + Date.now();
-
-},{"./helpers/bundle-url":"lgJ39"}],"fiAJl":[function(require,module,exports) {
-module.exports = require("./helpers/bundle-url").getBundleURL("7UhFu") + "keyd.34e2820b.glb" + "?" + Date.now();
 
 },{"./helpers/bundle-url":"lgJ39"}],"gWaPM":[function(require,module,exports) {
 module.exports = require("./helpers/bundle-url").getBundleURL("7UhFu") + "coin.adee9a2d.png" + "?" + Date.now();
