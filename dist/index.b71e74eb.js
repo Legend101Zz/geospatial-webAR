@@ -713,7 +713,7 @@ function render(totalDist) {
         camera.updateFrame(renderer);
         coinModel.scale.add(new _three.Vector3(0.0002, 0.0002, 0.0002));
         console.log("Distance of the user from the origin:", checkDist);
-        if (checkDist > 1.85 && coinModel.visible) {
+        if (checkDist > 0.85 && coinModel.visible) {
             coinModel.visible = false;
             totalpoints += 1;
             // Create translucent background div
